@@ -35,7 +35,7 @@ body {
 
 ## Coming Soon
 
-This plugin is still in beta. Look forward more magic, like:
+This plugin is still in beta, so look forward to more magic, like:
 
 - Automagical support for adjacent fonts.
 - <s>Automagical support for the Google Font foundry.</s> 
