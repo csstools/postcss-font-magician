@@ -2,9 +2,15 @@
 
 <img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
-[PostCSS Font Magician] is a [PostCSS] plugin that magically generates all the @font-face rules. Never write a `@font-face` rule again.
+[PostCSS Font Magician] is a [PostCSS] plugin that magically generates all your `@font-face` rules. Never write a `@font-face` rule again.
 
-Not only are `@font-face` rules added automatically, but local fonts are always referenced first in order to save bandwidth. System fonts for serif and sans-serif will automatically follow Bootstrap’s typography preferences, and cached Google Fonts are automatically referenced whenever necessary.
+Local fonts are referenced automatically. Chill bandwidth.
+
+Google Fonts can be added automatically. No thinking required.
+
+Using fonts from another directory? Just specify the `directory`. That’s it. Really.
+
+Want Bootstrap’s typography? Fallbacks for `serif` and `sans-serif` are already configured. Enjoy.
 
 ```css
 /* before */
@@ -24,24 +30,13 @@ body {
          url("http://fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?") format("eot"),
          url("http://fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2") format("woff2"),
          url("http://fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff") format("woff"),
-         url("http://fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf") format("truetype"),
-         url("http://fonts.gstatic.com/l/font?kit=1xLueNrnwaEUg1pDxEf7_A&skey=8a351bda90f672d8#Alice") format("svg")
+         url("http://fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf") format("truetype")
 }
 
 body {
     font-family: "Alice";
 }
 ```
-
-## Coming Soon
-
-This plugin is still in beta, so look forward to more magic, like:
-
-- Automagical support for adjacent fonts.
-- <s>Automagical support for the Google Font foundry.</s> 
-- Automagical support for the TypeKit foundry.
-- Magical option to rename any font family name.
-- Magical enabling or disabling of any foundry (Bootstrap, Google, or TypeKit).
 
 Request more features by [opening an issue].
 
@@ -59,7 +54,7 @@ npm install postcss-font-magician --save-dev
 ### Node
 
 ```js
-postcss([ require('postcss-font-magician')({ /* options */ }) ])
+require('postcss-font-magician')({ /* options */ }).process(some_css);
 ```
 
 ### Grunt
@@ -88,6 +83,85 @@ grunt.initConfig({
     }
 });
 ```
+
+### Options
+
+#### directory
+
+Tell me the directory of your fonts. I’ve figured out what every font in there is anyway.
+
+```js
+require('postcss-font-magician')({
+    directory: '../fonts'
+});
+```
+
+#### aliases
+
+When you say one thing you mean another. I got it.
+
+```js
+require('postcss-font-magician')({
+    aliases: {
+        'sans-serif': 'Source Sans Pro'
+    }
+});
+```
+
+#### formats
+
+Tell me what formats you want to use. I’ll use them.
+
+```js
+require('postcss-font-magician')({
+    formats: 'woff2 woff'
+});
+```
+
+#### foundries
+
+Enable or disable any foundry. You’re the boss.
+
+```js
+require('postcss-font-magician')({
+    foundries: 'bootstrap google'
+});
+```
+
+#### fonts
+
+Must you be so specific? Very well.
+
+```js
+require('postcss-font-magician')({
+    fonts: {
+        'My Special Font': {
+            400: {
+                normal: {
+                    url: {
+                        woff2: 'path/to/my-special-font.woff2'
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+## Future
+
+Look forward to more magic, like:
+
+- <s>Support for fonts in a path.</s>
+- <s>Support for the Google Font foundry.</s> 
+- Support for the TypeKit foundry.
+- <s>Option to disable any foundry.</s>
+- <s>Option to alias any font family.</s>
+- Option to put `@font-face` rules into a separate CSS file.
+- Option to put `@font-face` rules into an JavaScript file for asynchronous loading.
+- Option to warn you when fonts are used that do not have a `@font-face` rule.
+
+Enjoy!
 
 [ci]: https://travis-ci.org/jonathantneal/postcss-font-magician
 [ci-img]: https://travis-ci.org/jonathantneal/postcss-font-magician.svg
