@@ -2,15 +2,15 @@
 
 <img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
-[PostCSS Font Magician] is a [PostCSS] plugin that magically generates all your `@font-face` rules. Never write a `@font-face` rule again.
+[PostCSS Font Magician] is a [PostCSS] plugin that magically generates all of your `@font-face` rules. Never write a `@font-face` rule again.
 
-Local fonts are referenced automatically. Chill bandwidth.
+Google Fonts are used automatically.
 
-Google Fonts can be added automatically. No thinking required.
+Local fonts are used automatically.
 
-Using fonts from another directory? Just specify the `directory`. That’s it. Really.
+Using fonts in a directory? Just specify the `directory`. That’s it. Really.
 
-Want Bootstrap’s typography? Fallbacks for `serif` and `sans-serif` are already configured. Enjoy.
+Like Bootstrap typography? Families for `serif` and `sans-serif` are already configured.
 
 ```css
 /* before */
@@ -136,10 +136,12 @@ Must you be so specific? Very well.
 require('postcss-font-magician')({
     fonts: {
         'My Special Font': {
-            400: {
-                normal: {
-                    url: {
-                        woff2: 'path/to/my-special-font.woff2'
+            variants: {
+                400: {
+                    normal: {
+                        url: {
+                            woff2: 'path/to/my-special-font.woff2'
+                        }
                     }
                 }
             }
