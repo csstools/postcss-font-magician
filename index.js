@@ -1,7 +1,9 @@
+var path = require('path');
 var postcss = require('postcss');
+var getDirectoryFonts = require('directory-fonts-complete');
 
 var foundries = {
-	path: {},
+	directory: {},
 	bootstrap: require('bootstrap-fonts-complete'),
 	google: require('google-fonts-complete')
 };
@@ -44,7 +46,7 @@ function getFontData(fontFamily) {
 	}
 }
 
-function setFontFaceRules(css, fontFamily) {
+function setFontFaceRules(css, fontFamily, opts) {
 	var fontData = getFontData(fontFamily);
 	var fontFaceRules = [];
 
@@ -63,7 +65,9 @@ function setFontFaceRules(css, fontFamily) {
 				}
 
 				if (fontWeightData.url) {
-					Object.keys(fontWeightData.url).sort(sortURLs).forEach(function (format) {
+					Object.keys(fontWeightData.url).sort(sortURLs).filter(function (format) {
+						return opts.formats.indexOf(format) !== -1;
+					}).forEach(function (format) {
 						var url = trimProtocol(fontWeightData.url[format]);
 
 						var formatValue = getFormatValue(format);
@@ -110,12 +114,27 @@ function getFontFamily(value) {
 	return trimQuotes(postcss.list.space(postcss.list.comma(value)[0]).slice(-1)[0]);
 }
 
+function getRelativeDirectory(cssPath, opts) {
+	var directoryPath = path.dirname(cssPath || '.') + '/' + opts.directory;
+
+	var cleanDirectoryPath = directoryPath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
+
+	return cleanDirectoryPath;
+}
+
 module.exports = postcss.plugin('postcss-font-magician', function (opts) {
 	opts = opts || {};
+
+	opts.formats = 'formats' in opts ? opts.formats : 'eot ttf woff woff2';
+	opts.directory = 'directory' in opts ? opts.directory : '';
 
 	return function (css) {
 		var fontFamilyInUse = {};
 		var rules = [];
+
+		var directory = getRelativeDirectory(css.source.input.file, opts);
+
+		foundries.directory = opts.directory ? getDirectoryFonts(directory) : {};
 
 		css.eachAtRule('font-face', function (rule) {
 			rule.eachDecl('font-family', function (decl) {
@@ -129,7 +148,7 @@ module.exports = postcss.plugin('postcss-font-magician', function (opts) {
 			if (!fontFamilyInUse[fontFamily]) {
 				fontFamilyInUse[fontFamily] = true;
 
-				setFontFaceRules(css, fontFamily);
+				setFontFaceRules(css, fontFamily, opts);
 			}
 		});
 
