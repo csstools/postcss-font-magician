@@ -4,13 +4,7 @@
 
 [PostCSS Font Magician] is a [PostCSS] plugin that magically generates all of your `@font-face` rules. Never write a `@font-face` rule again.
 
-Google Fonts are used automatically.
-
-Local fonts are used automatically.
-
-Using fonts in a directory? Just specify the `directory`. That’s it. Really.
-
-Like Bootstrap typography? Families for `serif` and `sans-serif` are already configured.
+Just use the **font** and **font-family** properties like they were magic.
 
 ```css
 /* before */
@@ -38,7 +32,15 @@ body {
 }
 ```
 
-Request more features by [opening an issue].
+Using a **Google Font**? I’ll add it for you. I’ll use the **local** version first, too.
+
+Using a font from a **directory**? Just tell me the directory and I’ll figure out the rest.
+
+Want **Bootstrap** typography? Beautiful, fully-stacked families for **serif**, **sans-serif**, and **monospace** are waiting for you.
+
+Seriously, never write a `@font-face` rule again.
+
+Request more magic by [creating an issue].
 
 ## Usage
 
@@ -54,7 +56,7 @@ npm install postcss-font-magician --save-dev
 ### Node
 
 ```js
-require('postcss-font-magician')({ /* options */ }).process(some_css);
+postcss([ require('postcss-font-magician')({ /* options */ }) ])
 ```
 
 ### Grunt
@@ -84,11 +86,13 @@ grunt.initConfig({
 });
 ```
 
-### Options
+---
+
+## Options
 
 #### directory
 
-Tell me the directory of your fonts. I’ve figured out what every font in there is anyway.
+Tell me the directory of your fonts. I’ll figure out what fonts are in there.
 
 ```js
 require('postcss-font-magician')({
@@ -98,7 +102,7 @@ require('postcss-font-magician')({
 
 #### aliases
 
-When you say one thing you mean another. I got it.
+Say one thing and mean another. I’ll get it.
 
 ```js
 require('postcss-font-magician')({
@@ -118,6 +122,9 @@ require('postcss-font-magician')({
 });
 ```
 
+Supported formats include `woff2`, `woff`, `ttf`, `eot`, `svg`, and `otf`.
+By default, `woff2`, `woff`, `ttf` and `eot` are enabled.
+
 #### foundries
 
 Enable or disable any foundry. You’re the boss.
@@ -127,6 +134,9 @@ require('postcss-font-magician')({
     foundries: 'bootstrap google'
 });
 ```
+
+Supported foundries include `font`, `directory`, `bootstrap`, and `google`.
+By default, they are all enabled.
 
 #### fonts
 
@@ -167,7 +177,7 @@ Enjoy!
 
 [ci]: https://travis-ci.org/jonathantneal/postcss-font-magician
 [ci-img]: https://travis-ci.org/jonathantneal/postcss-font-magician.svg
-[opening an issue]: https://github.com/jonathantneal/postcss-font-magician/issues
+[creating an issue]: https://github.com/jonathantneal/postcss-font-magician/issues
 [Grunt PostCSS]: https://github.com/nDmitry/grunt-postcss
 [PostCSS]: https://github.com/postcss/postcss
 [PostCSS Font Magician]: https://github.com/jonathantneal/postcss-font-magician
