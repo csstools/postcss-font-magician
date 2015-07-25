@@ -124,4 +124,30 @@ describe('postcss-font-magician', function () {
 			done
 		);
 	});
+
+	it('support custom-specified fonts', function (done) {
+		test(
+			'a{font-family:custom}b{}',
+
+			'@font-face{font-family:custom;font-style:400;font-weight:normal;src:url(path/to/my-special-font.woff2) format("woff2")}' +
+			'a{font-family:custom}b{}',
+
+			{
+				fonts: {
+					custom: {
+						variants: {
+							400: {
+								normal: {
+									url: {
+										woff2: 'path/to/my-special-font.woff2'
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			done
+		);
+	});
 });
