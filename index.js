@@ -49,7 +49,7 @@ function getFontData(fontFamily, opts) {
 }
 
 function setFontFaceRules(css, fontFamily, opts) {
-	var fontData = getFontData(fontFamily, opts);
+	var fontData = getFontData(opts.aliases[fontFamily] || fontFamily, opts);
 	var fontFaceRules = [];
 
 	if (fontData) {
@@ -127,6 +127,7 @@ function getRelativeDirectory(cssPath, opts) {
 module.exports = postcss.plugin('postcss-font-magician', function (opts) {
 	opts = opts || {};
 
+	opts.aliases = 'aliases' in opts ? opts.aliases : {};
 	opts.foundries = 'foundries' in opts ? opts.foundries : 'directory bootstrap google';
 	opts.formats = 'formats' in opts ? opts.formats : 'eot ttf woff woff2';
 	opts.directory = 'directory' in opts ? opts.directory : '';
