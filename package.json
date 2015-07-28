@@ -1,6 +1,6 @@
 {
 	"name": "postcss-font-magician",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "PostCSS plugin that magically generates all the @font-face rules",
 	"keywords": [
 		"postcss",

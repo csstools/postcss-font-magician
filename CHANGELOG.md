@@ -1,3 +1,7 @@
+## 1.2.1 (2015-07-28)
+
+Added: `process` method
+
 ## 1.2.0 (2015-07-28)
 
 Added: Plugin refactoring
