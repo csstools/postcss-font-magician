@@ -265,3 +265,10 @@ function plugin(opts) {
 
 // set plugin
 module.exports = postcss.plugin('postcss-font-magician', plugin);
+
+// stand-alone process method
+module.exports.process = function (css, opts) {
+	var processed = postcss([module.exports(opts)]).process(css, opts);
+
+	return opts && opts.map && !opts.map.inline ? processed : processed.css;
+};
