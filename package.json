@@ -1,0 +1,8 @@
+{
+  "name": "gh-pages",
+  "private": true,
+  "dependencies": {
+    "dacoda": "^1.0.0",
+    "postcss-font-magician": "^1.2.1"
+  }
+}
