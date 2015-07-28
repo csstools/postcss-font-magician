@@ -50,7 +50,7 @@ describe('postcss-font-magician', function () {
 		test(
 			'a{font-family:"Alice"}b{}',
 
-			'@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local(Alice),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff) format("woff"),url(//fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf) format("truetype")}' +
+			'@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local(Alice),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff) format("woff")}' +
 			'a{font-family:"Alice"}b{}',
 
 			{},
@@ -62,7 +62,7 @@ describe('postcss-font-magician', function () {
 		test(
 			'a{font-family:"Alice"}b{font-family:"Alice"}',
 
-			'@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local(Alice),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff) format("woff"),url(//fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf) format("truetype")}' +
+			'@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local(Alice),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff) format("woff")}' +
 			'a{font-family:"Alice"}b{font-family:"Alice"}',
 
 			{},
@@ -70,15 +70,15 @@ describe('postcss-font-magician', function () {
 		);
 	});
 
-	it('supports directory fonts', function (done) {
+	it('supports hosted fonts', function (done) {
 		test(
 			'a{font-family:"Source Sans Pro"}b{}',
 
-			'@font-face{font-family:"Source Sans Pro";font-style:400;font-weight:normal;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff"),url(./test/fonts/pathFont.ttf) format("truetype")}' +
+			'@font-face{font-family:"Source Sans Pro";font-style:400;font-weight:normal;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff")}' +
 			'a{font-family:"Source Sans Pro"}b{}',
 
 			{
-				directory: './test/fonts'
+				hosted: './test/fonts'
 			},
 			done
 		);
@@ -102,7 +102,7 @@ describe('postcss-font-magician', function () {
 			'a{font-family:"Alice"}b{}',
 
 			{
-				foundries: 'directory'
+				foundries: 'hosted'
 			},
 			done
 		);
@@ -112,8 +112,8 @@ describe('postcss-font-magician', function () {
 		test(
 			'a{font-family:body}b{}',
 
-			'@font-face{font-family:body;font-style:normal;font-weight:400;src:local(Montserrat-Regular),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYFQlYEbsez9cZjKsNMjLOwM.eot?#) format("eot"),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format("woff2"),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYBsxEYwM7FgeyaSgU71cLG0.woff) format("woff"),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYC3USBnSvpkopQaUR-2r7iU.ttf) format("truetype")}' +
-			'@font-face{font-family:body;font-style:normal;font-weight:700;src:local(Montserrat-Bold),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcmzklk6MJbhg7BmBP42CjCQ.eot?#) format("eot"),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcoWiMMZ7xLd792ULpGE4W_Y.woff2) format("woff2"),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcgFhaRv2pGgT5Kf0An0s4MM.woff) format("woff"),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcvEr6Hm6RMS0v1dtXsGir4g.ttf) format("truetype")}' +
+			'@font-face{font-family:body;font-style:normal;font-weight:400;src:local(Montserrat-Regular),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYFQlYEbsez9cZjKsNMjLOwM.eot?#) format("eot"),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format("woff2"),url(//fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYBsxEYwM7FgeyaSgU71cLG0.woff) format("woff")}' +
+			'@font-face{font-family:body;font-style:normal;font-weight:700;src:local(Montserrat-Bold),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcmzklk6MJbhg7BmBP42CjCQ.eot?#) format("eot"),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcoWiMMZ7xLd792ULpGE4W_Y.woff2) format("woff2"),url(//fonts.gstatic.com/s/montserrat/v6/IQHow_FEYlDC4Gzy_m8fcgFhaRv2pGgT5Kf0An0s4MM.woff) format("woff")}' +
 			'a{font-family:body}b{}',
 
 			{
@@ -125,21 +125,21 @@ describe('postcss-font-magician', function () {
 		);
 	});
 
-	it('support custom-specified fonts', function (done) {
+	it('support custom fonts', function (done) {
 		test(
-			'a{font-family:custom}b{}',
+			'a{font-family:body}b{}',
 
-			'@font-face{font-family:custom;font-style:400;font-weight:normal;src:url(path/to/my-special-font.woff2) format("woff2")}' +
-			'a{font-family:custom}b{}',
+			'@font-face{font-family:body;font-style:400;font-weight:normal;src:url(path/to/my-body-font.woff2) format("woff2")}' +
+			'a{font-family:body}b{}',
 
 			{
-				fonts: {
-					custom: {
+				custom: {
+					body: {
 						variants: {
 							400: {
 								normal: {
 									url: {
-										woff2: 'path/to/my-special-font.woff2'
+										woff2: 'path/to/my-body-font.woff2'
 									}
 								}
 							}
