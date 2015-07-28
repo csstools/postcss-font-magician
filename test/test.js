@@ -150,4 +150,17 @@ describe('postcss-font-magician', function () {
 			done
 		);
 	});
+
+	it('support async font loading', function (done) {
+		test(
+			'a{font-family:Alice}b{}',
+
+			'a{font-family:Alice}b{}',
+
+			{
+				async: './test/fontface.js.result'
+			},
+			done
+		);
+	});
 });
