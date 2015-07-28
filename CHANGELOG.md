@@ -1,3 +1,7 @@
+## 1.2.0 (2015-07-28)
+
+Added: Plugin refactoring
+
 ## 1.1.0 (2015-07-25)
 
 Added: Support custom specified fonts
