@@ -31,13 +31,15 @@ body {
 }
 ```
 
-Want to use a **Google Font**? I’ll add it for you.
+Want to use **Google Fonts**? I’ll add them for you.
 
-Want to use the visitor’s **local** copy first? Done.
+Want to use the visitor’s **local** copy of a font? Done.
 
-Want to host your own fonts? Just tell me where they are and I’ll do the rest.
+Want to **host** your own fonts? Just tell me where they are, and I’ll do the rest.
 
-Want **Bootstrap** typography? Beautiful, fully-stacked families for **serif**, **sans-serif**, and **monospace** are waiting for you.
+Want to load a font **async** and only use it after it has been loaded? I can do that too.
+
+Want to use **Bootstrap** typography? Beautiful, fully-stacked families for **serif**, **sans-serif**, and **monospace** are waiting for you.
 
 Seriously, never write a `@font-face` rule again.
 
@@ -128,6 +130,8 @@ require('postcss-font-magician')({
 });
 ```
 
+The directory will be scanned for font files, which will be read and automatically added if they are used in the document.
+
 #### aliases
 
 Prefer another name for particular fonts?
@@ -139,6 +143,20 @@ require('postcss-font-magician')({
    }
 });
 ```
+
+The `@font-face` rule will be updated so that your alias key is the new name of the font family.
+
+#### async
+
+Need to load the fonts asynchronously?
+
+```js
+require('postcss-font-magician')({
+   async: 'path/to/your-fonts-async-loader.js'
+});
+```
+
+Any `@font-face` rules are moved out of CSS and into a JavaScript file may be added to a page separately. It will automatically load the fonts before using them.
 
 #### formats
 
@@ -193,7 +211,6 @@ require('postcss-font-magician')({
 Look forward to more magic, like:
 
 - Support for the TypeKit foundry.
-- Option to move `@font-face` rules into an JavaScript file for asynchronous loading.
 - Option to warn you when unmatched typefaces are used.
 
 Enjoy!
