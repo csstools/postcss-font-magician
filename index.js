@@ -1,6 +1,7 @@
 /* Required
    ========================================================================== */
 
+var fs = require('fs');
 var path = require('path');
 var postcss = require('postcss');
 var getDirectoryFonts = require('directory-fonts-complete');
@@ -11,6 +12,7 @@ var getDirectoryFonts = require('directory-fonts-complete');
 var arrayOptions = ['foundries', 'foundriesOrder', 'formats'];
 
 var defaultOptions = {
+	async: false,
 	aliases: {},
 	custom: {},
 	foundries: ['custom', 'hosted', 'bootstrap', 'google'],
@@ -73,10 +75,10 @@ function getQuoteless(string) {
 	return string.replace(/^(['"])(.+)\1$/g, '$2');
 }
 
-function getRelativeDirectory(cssPath, directory) {
-	var directoryPath = path.dirname(cssPath || '.') + '/' + directory;
+function getRelativePath(cssPath, relativePath) {
+	relativePath = path.dirname(cssPath || '.') + '/' + relativePath;
 
-	return directoryPath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
+	return relativePath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
 }
 
 function getSafelyQuoted(string) {
@@ -87,6 +89,19 @@ function getSafelyQuoted(string) {
 
 /* CSS Methods
    ========================================================================== */
+
+function getValueByDeclaration(rule, property) {
+	var index = -1;
+	var declaration;
+
+	while (declaration = rule.nodes[++index]) {
+		if (declaration.prop === property) {
+			return declaration.value;
+		}
+	}
+
+	return '';
+}
 
 function getFirstFontFamily(decl) {
 	return getQuoteless(
@@ -220,7 +235,7 @@ function plugin(opts) {
 		if (opts.hosted && opts.foundries.indexOf('hosted') !== -1) {
 			// set the hosted fonts by relative directory
 			foundries.hosted = getDirectoryFonts(
-				getRelativeDirectory(css.source.input.file, opts.hosted)
+				getRelativePath(css.source.input.file, opts.hosted)
 			);
 		}
 		// otherwise delete the hosted foundries
@@ -260,6 +275,32 @@ function plugin(opts) {
 				}
 			}
 		});
+
+		if (opts.async) {
+			var fontFaces = [];
+
+			// for each font face rule
+			css.eachAtRule('font-face', function (rule) {
+				rule.removeSelf();
+
+				fontFaces.push({
+					family: getValueByDeclaration(rule, 'font-family'),
+					weight: getValueByDeclaration(rule, 'font-weight'),
+					style: getValueByDeclaration(rule, 'font-style'),
+					src: getValueByDeclaration(rule, 'src')
+				});
+			});
+
+			if (fontFaces) {
+				var asyncPath = getRelativePath(css.source.input.file, opts.async);
+
+				var asyncJs = '(function(){' +
+					fs.readFileSync('loader.min.js', 'utf8') + 'loadFonts(' + JSON.stringify(fontFaces) + ')' +
+				'})()';
+
+				fs.writeFileSync(asyncPath, asyncJs);
+			}
+		}
 	};
 }
 
