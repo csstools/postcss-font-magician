@@ -1,3 +1,7 @@
+## 1.3.0 (2015-07-28)
+
+Added: `async` method
+
 ## 1.2.1 (2015-07-28)
 
 Added: `process` method
