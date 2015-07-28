@@ -1,165 +1,267 @@
+/* Required
+   ========================================================================== */
+
 var path = require('path');
 var postcss = require('postcss');
 var getDirectoryFonts = require('directory-fonts-complete');
 
+/* Options
+   ========================================================================== */
+
+var arrayOptions = ['foundries', 'foundriesOrder', 'formats'];
+
+var defaultOptions = {
+	aliases: {},
+	custom: {},
+	foundries: ['custom', 'hosted', 'bootstrap', 'google'],
+	formatHints: {
+		otf: 'opentype',
+		ttf: 'truetype'
+	},
+	formats: ['local', 'eot', 'woff2', 'woff'],
+	hosted: ''
+};
+
 var foundries = {
-	fonts: {},
-	directory: {},
+	custom: {},
+	hosted: {},
 	bootstrap: require('bootstrap-fonts-complete'),
 	google: require('google-fonts-complete')
 };
 
-function getFormatValue(format) {
-	return format === 'ttf' ? '"truetype"' : '"' + format + '"';
-}
+/* Helper Methods
+   ========================================================================== */
 
-function getReferenceValue(type, reference) {
-	return type + '(' + reference + ')';
-}
-
-function sortURLs(urlA, urlB) {
-	var order = 'eot woff2 woff ttf svg'.split(' ');
-
-	return order.indexOf(urlA) - order.indexOf(urlB);
-}
-
-function trimProtocol(url) {
-	return url.replace(/^https?:/, '');
-}
-
-function trimQuotes(string) {
-	return string.replace(/^(['"])(.+)\1$/g, '$2');
-}
-
-function safeQuotes(string) {
-	var trimmedString = trimQuotes(string);
-
-	return trimmedString.match(/\s/) ? '"' + trimmedString + '"' : trimmedString;
-}
-
-function getFontData(fontFamily, opts) {
-	for (var name in foundries) {
-		if (opts.foundries && opts.foundries.indexOf(name) !== -1) {
-			var foundry = foundries[name];
-
-			if (fontFamily in foundry) {
-				return foundry[fontFamily];
+function getConfiguredOptions(opts) {
+	for (var key in defaultOptions) {
+		if (key in opts) {
+			if (arrayOptions.indexOf(key) && typeof opts[key] === 'string') {
+				opts[key] = opts[key].split(/\s+/);
 			}
+		} else {
+			opts[key] = defaultOptions[key];
+		}
+	}
+
+	return opts;
+}
+
+function getFont(family, opts) {
+	var index = -1;
+	var foundryName;
+
+	family = opts.aliases[family] || family;
+
+	while (foundryName = opts.foundries[++index]) {
+		var foundry = foundries[foundryName];
+
+		if (foundry && family in foundry) {
+			return foundry[family];
 		}
 	}
 }
 
-function setFontFaceRules(css, fontFamily, opts) {
-	var fontData = getFontData(opts.aliases[fontFamily] || fontFamily, opts);
+function getFormatHint(formatHints, extension) {
+	return '"' + (formatHints[extension] || extension) + '"';
+}
+
+function getMethod(name, params) {
+	return name + '(' + params + ')';
+}
+
+function getQuoteless(string) {
+	return string.replace(/^(['"])(.+)\1$/g, '$2');
+}
+
+function getRelativeDirectory(cssPath, directory) {
+	var directoryPath = path.dirname(cssPath || '.') + '/' + directory;
+
+	return directoryPath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
+}
+
+function getSafelyQuoted(string) {
+	string = getQuoteless(string);
+
+	return string.match(/\s/) ? '"' + string + '"' : string;
+}
+
+/* CSS Methods
+   ========================================================================== */
+
+function getFirstFontFamily(decl) {
+	return getQuoteless(
+		postcss.list.space(
+			postcss.list.comma(decl.value)[0]
+		).slice(-1)[0]
+	);
+}
+
+function getFontFaceRules(family, opts) {
+	// set the font face rules array
 	var fontFaceRules = [];
 
-	if (fontData) {
-		Object.keys(fontData.variants).forEach(function (fontStyle) {
-			var fontStyleData = fontData.variants[fontStyle];
+	// get the font
+	var font = getFont(family, opts);
 
-			Object.keys(fontStyleData).forEach(function (fontWeight) {
-				var fontSrc = [];
-				var fontWeightData = fontStyleData[fontWeight];
+	// conditionally return early if no font is found
+	if (!font) return fontFaceRules;
 
-				if (fontWeightData.local) {
-					fontWeightData.local.forEach(function (local) {
-						fontSrc.push(getReferenceValue('local', safeQuotes(local)));
+	// for each font style
+	Object.keys(font.variants).forEach(function (style) {
+		// set the font weights
+		var weights = font.variants[style];
+
+		// for each font weight
+		Object.keys(weights).forEach(function (weight) {
+			// set the urls
+			var urls = weights[weight];
+
+			// set the sources array
+			var sources = [];
+
+			// for each format
+			opts.formats.forEach(function (format) {
+				// if the format is local
+				if (format === 'local') {
+					// conditionally return early if no locals are available
+					if (!urls.local) return;
+
+					// for each local font
+					urls.local.forEach(function (local) {
+						// set the source as the local font
+						var source = getMethod('local', getSafelyQuoted(local));
+
+						// add the source to the sources array
+						sources.push(source);
 					});
 				}
+				// otherwise
+				else {
+					// conditionally return early if no urls are available
+					if (!urls.url) return;
 
-				if (fontWeightData.url) {
-					Object.keys(fontWeightData.url).sort(sortURLs).filter(function (format) {
-						return opts.formats.indexOf(format) !== -1;
-					}).forEach(function (format) {
-						var url = trimProtocol(fontWeightData.url[format]);
+					// set the url
+					var url = urls.url[format];
 
-						var formatValue = getFormatValue(format);
+					// conditionally return early if no url is available
+					if (!url) return;
 
-						if (format === 'eot') url += '?#';
+					// remove the http/https protocol
+					url = url.replace(/^https?:/, '');
 
-						fontSrc.push(getReferenceValue('url', url) + ' ' + getReferenceValue('format', formatValue));
-					});
+					// add the IE hack
+					if (format === 'eot') url += '?#';
+
+					// set the format hint
+					var formatHint = getFormatHint(opts.formatHints, format);
+
+					// set the source as the url and format hint
+					var source = getMethod('url', url) + ' ' + getMethod('format', formatHint);
+
+					// push the source to the sources array
+					sources.push(source);
 				}
+			});
 
+			// if the sources array is filled
+			if (sources.length) {
+				// create a font face rule
 				var fontFaceRule = postcss.atRule({
 					name: 'font-face'
 				});
 
+				// append a font-family declaration
 				fontFaceRule.append(postcss.decl({
 					prop: 'font-family',
-					value: safeQuotes(fontFamily)
+					value: getSafelyQuoted(family)
 				}));
 
+				// append a font-style declaration
 				fontFaceRule.append(postcss.decl({
 					prop: 'font-style',
-					value: fontStyle
+					value: style
 				}));
 
+				// append a font-weight declaration
 				fontFaceRule.append(postcss.decl({
 					prop: 'font-weight',
-					value: fontWeight
+					value: weight
 				}));
 
+				// append a src declaration
 				fontFaceRule.append(postcss.decl({
 					prop: 'src',
-					value: fontSrc.join(',')
+					value: sources.join(',')
 				}));
 
+				// push the font face rule to the font face rules array
 				fontFaceRules.push(fontFaceRule);
-			});
-		});
-	}
-
-	css.prepend(fontFaceRules);
-}
-
-function getFontFamily(value) {
-	return trimQuotes(postcss.list.space(postcss.list.comma(value)[0]).slice(-1)[0]);
-}
-
-function getRelativeDirectory(cssPath, opts) {
-	var directoryPath = path.dirname(cssPath || '.') + '/' + opts.directory;
-
-	var cleanDirectoryPath = directoryPath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
-
-	return cleanDirectoryPath;
-}
-
-module.exports = postcss.plugin('postcss-font-magician', function (opts) {
-	opts = opts || {};
-
-	opts.aliases = 'aliases' in opts ? opts.aliases : {};
-	opts.fonts = 'fonts' in opts ? opts.fonts : {};
-	opts.foundries = 'foundries' in opts ? opts.foundries : 'fonts directory bootstrap google';
-	opts.formats = 'formats' in opts ? opts.formats : 'eot ttf woff woff2';
-	opts.directory = 'directory' in opts ? opts.directory : '';
-
-	for (var key in opts.fonts) foundries.fonts[key] = opts.fonts[key];
-
-	return function (css) {
-		var fontFamilyInUse = {};
-		var rules = [];
-
-		var directory = getRelativeDirectory(css.source.input.file, opts);
-
-		foundries.directory = opts.directory ? getDirectoryFonts(directory) : {};
-
-		css.eachAtRule('font-face', function (rule) {
-			rule.eachDecl('font-family', function (decl) {
-				fontFamilyInUse[trimQuotes(decl.value)] = true;
-			});
-		});
-
-		css.eachDecl(/^font(-family)?$/, function (decl) {
-			var fontFamily = getFontFamily(decl.value);
-
-			if (!fontFamilyInUse[fontFamily]) {
-				fontFamilyInUse[fontFamily] = true;
-
-				setFontFaceRules(css, fontFamily, opts);
 			}
 		});
+	});
 
-		css.prepend(rules);
+	// return the font face rules array
+	return fontFaceRules;
+}
+
+function plugin(opts) {
+	// get configured option
+	opts = getConfiguredOptions(opts || {});
+
+	// set the custom foundry
+	foundries.custom = opts.custom;
+
+	// return the plugin
+	return function (css) {
+		// set font families in use
+		var fontFamiliesDeclared = {};
+
+		// if hosted fonts are present and permitted
+		if (opts.hosted && opts.foundries.indexOf('hosted') !== -1) {
+			// set the hosted fonts by relative directory
+			foundries.hosted = getDirectoryFonts(
+				getRelativeDirectory(css.source.input.file, opts.hosted)
+			);
+		}
+		// otherwise delete the hosted foundries
+		else {
+			delete foundries.hosted;
+		}
+
+		// for each font face rule
+		css.eachAtRule('font-face', function (rule) {
+			// for each font-family declaration
+			rule.eachDecl('font-family', function (decl) {
+				// set the font family
+				var family = getQuoteless(decl.value);
+
+				// set the font family as declared
+				fontFamiliesDeclared[family] = true;
+			});
+		});
+
+		// for each font declaration
+		css.eachDecl(/^font(-family)?$/, function (decl) {
+			// set the font family as the first declared font family
+			var family = getFirstFontFamily(decl);
+
+			// if the font family is not declared
+			if (!fontFamiliesDeclared[family]) {
+				// set the font family as declared
+				fontFamiliesDeclared[family] = true;
+
+				// set the font face rules
+				var fontFaceRules = getFontFaceRules(family, opts);
+
+				// if the font face rules array is filled
+				if (fontFaceRules.length) {
+					// prepend the font face rules
+					css.prepend(fontFaceRules);
+				}
+			}
+		});
 	};
-});
+}
+
+// set plugin
+module.exports = postcss.plugin('postcss-font-magician', plugin);
