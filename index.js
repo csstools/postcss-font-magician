@@ -244,7 +244,7 @@ function plugin(opts) {
 		}
 
 		// for each font face rule
-		css.eachAtRule('font-face', function (rule) {
+		css.walkAtRules('font-face', function (rule) {
 			// for each font-family declaration
 			rule.eachDecl('font-family', function (decl) {
 				// set the font family
@@ -280,7 +280,7 @@ function plugin(opts) {
 			var fontFaces = [];
 
 			// for each font face rule
-			css.eachAtRule('font-face', function (rule) {
+			css.walkAtRules('font-face', function (rule) {
 				rule.removeSelf();
 
 				fontFaces.push({
