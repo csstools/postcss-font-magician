@@ -244,9 +244,9 @@ function plugin(opts) {
 		}
 
 		// for each font face rule
-		css.eachAtRule('font-face', function (rule) {
+		css.walkAtRules('font-face', function (rule) {
 			// for each font-family declaration
-			rule.eachDecl('font-family', function (decl) {
+			rule.walkDecls('font-family', function (decl) {
 				// set the font family
 				var family = getQuoteless(decl.value);
 
@@ -256,7 +256,7 @@ function plugin(opts) {
 		});
 
 		// for each font declaration
-		css.eachDecl(/^font(-family)?$/, function (decl) {
+		css.walkDecls(/^font(-family)?$/, function (decl) {
 			// set the font family as the first declared font family
 			var family = getFirstFontFamily(decl);
 
@@ -280,7 +280,7 @@ function plugin(opts) {
 			var fontFaces = [];
 
 			// for each font face rule
-			css.eachAtRule('font-face', function (rule) {
+			css.walkAtRules('font-face', function (rule) {
 				rule.removeSelf();
 
 				fontFaces.push({
