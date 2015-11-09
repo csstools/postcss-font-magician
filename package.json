@@ -1,44 +1,45 @@
 {
-	"name": "postcss-font-magician",
-	"version": "1.3.0",
-	"description": "PostCSS plugin that magically generates all the @font-face rules",
-	"keywords": [
-		"postcss",
-		"css",
-		"postcss-plugin",
-		"fonts",
-		"faces",
-		"generate",
-		"generation",
-		"weights",
-		"styles",
-		"variants",
-		"google",
-		"web"
-	],
-	"author": "Jonathan Neal <jonathantneal@hotmail.com>",
-	"license": "CC0-1.0",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jonathantneal/postcss-font-magician.git"
-	},
-	"bugs": {
-		"url": "https://github.com/jonathantneal/postcss-font-magician/issues"
-	},
-	"homepage": "https://github.com/jonathantneal/postcss-font-magician",
-	"dependencies": {
-		"bootstrap-fonts-complete": "^1.0.0",
-		"directory-fonts-complete": "^1.0.0",
-		"google-fonts-complete": "^1.0.0",
-		"postcss": "^5.0.11"
-	},
-	"devDependencies": {
-		"chai": "^3.0.0",
-		"gulp": "^3.9.0",
-		"gulp-eslint": "^0.14.0",
-		"gulp-mocha": "^2.1.2"
-	},
-	"scripts": {
-		"test": "gulp"
-	}
+  "name": "postcss-font-magician",
+  "version": "1.3.0",
+  "description": "PostCSS plugin that magically generates all the @font-face rules",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "fonts",
+    "faces",
+    "generate",
+    "generation",
+    "weights",
+    "styles",
+    "variants",
+    "google",
+    "web"
+  ],
+  "author": "Jonathan Neal <jonathantneal@hotmail.com>",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathantneal/postcss-font-magician.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonathantneal/postcss-font-magician/issues"
+  },
+  "homepage": "https://github.com/jonathantneal/postcss-font-magician",
+  "dependencies": {
+    "bootstrap-fonts-complete": "^1.0.0",
+    "directory-fonts-complete": "^1.0.0",
+    "google-fonts-complete": "^1.0.0",
+    "postcss": "^5.0.11"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "es6-promise": "^3.0.2",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^0.14.0",
+    "gulp-mocha": "^2.1.2"
+  },
+  "scripts": {
+    "test": "gulp"
+  }
 }

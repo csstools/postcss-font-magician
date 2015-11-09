@@ -1,5 +1,6 @@
 /* Required
    ========================================================================== */
+require('es6-promise').polyfill();
 
 var fs = require('fs');
 var path = require('path');
@@ -281,7 +282,7 @@ function plugin(opts) {
 
 			// for each font face rule
 			css.walkAtRules('font-face', function (rule) {
-				rule.removeSelf();
+				rule.remove();
 
 				fontFaces.push({
 					family: getValueByDeclaration(rule, 'font-family'),
