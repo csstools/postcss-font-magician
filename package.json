@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
-    "es6-promise": "^3.0.2",
     "gulp": "^3.9.0",
     "gulp-eslint": "^0.14.0",
     "gulp-mocha": "^2.1.2"

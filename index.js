@@ -1,6 +1,5 @@
 /* Required
    ========================================================================== */
-require('es6-promise').polyfill();
 
 var fs = require('fs');
 var path = require('path');
