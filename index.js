@@ -12,23 +12,20 @@ var getDirectoryFonts = require('directory-fonts-complete');
 var arrayOptions = ['foundries', 'foundriesOrder', 'formats'];
 
 var defaultOptions = {
-	async: false,
-	aliases: {},
-	custom: {},
-	foundries: ['custom', 'hosted', 'bootstrap', 'google'],
-	formatHints: {
-		otf: 'opentype',
-		ttf: 'truetype'
-	},
-	formats: ['local', 'eot', 'woff2', 'woff'],
-	hosted: ''
+	async:       false,
+	aliases:     {},
+	custom:      {},
+	foundries:   ['custom', 'hosted', 'bootstrap', 'google'],
+	formatHints: { otf: 'opentype', ttf: 'truetype' },
+	formats:     ['local', 'eot', 'woff2', 'woff'],
+	hosted:      ''
 };
 
 var foundries = {
-	custom: {},
-	hosted: {},
+	custom:    {},
+	hosted:    {},
 	bootstrap: require('bootstrap-fonts-complete'),
-	google: require('google-fonts-complete')
+	google:    require('google-fonts-complete')
 };
 
 /* Helper Methods
@@ -149,9 +146,7 @@ function getFontFaceRules(family, opts) {
 						// add the source to the sources array
 						sources.push(source);
 					});
-				}
-				// otherwise
-				else {
+				} else {
 					// conditionally return early if no urls are available
 					if (!urls.url) return;
 
@@ -187,25 +182,25 @@ function getFontFaceRules(family, opts) {
 
 				// append a font-family declaration
 				fontFaceRule.append(postcss.decl({
-					prop: 'font-family',
+					prop:  'font-family',
 					value: getSafelyQuoted(family)
 				}));
 
 				// append a font-style declaration
 				fontFaceRule.append(postcss.decl({
-					prop: 'font-style',
+					prop:  'font-style',
 					value: style
 				}));
 
 				// append a font-weight declaration
 				fontFaceRule.append(postcss.decl({
-					prop: 'font-weight',
+					prop:  'font-weight',
 					value: weight
 				}));
 
 				// append a src declaration
 				fontFaceRule.append(postcss.decl({
-					prop: 'src',
+					prop:  'src',
 					value: sources.join(',')
 				}));
 
@@ -237,9 +232,8 @@ function plugin(opts) {
 			foundries.hosted = getDirectoryFonts(
 				getRelativePath(css.source.input.file, opts.hosted)
 			);
-		}
-		// otherwise delete the hosted foundries
-		else {
+		} else {
+			// otherwise delete the hosted foundries
 			delete foundries.hosted;
 		}
 
@@ -286,8 +280,8 @@ function plugin(opts) {
 				fontFaces.push({
 					family: getValueByDeclaration(rule, 'font-family'),
 					weight: getValueByDeclaration(rule, 'font-weight'),
-					style: getValueByDeclaration(rule, 'font-style'),
-					src: getValueByDeclaration(rule, 'src')
+					style:  getValueByDeclaration(rule, 'font-style'),
+					src:    getValueByDeclaration(rule, 'src')
 				});
 			});
 
