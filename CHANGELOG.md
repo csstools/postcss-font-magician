@@ -1,3 +1,8 @@
+## 1.4.0 (2015-12-07)
+
+Updated: PostCSS v5 dependency
+Updated: Developer dependencies and configuration
+
 ## 1.3.0 (2015-07-28)
 
 Added: `async` method
