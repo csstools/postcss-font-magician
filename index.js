@@ -75,6 +75,8 @@ function getQuoteless(string) {
 function getRelativePath(cssPath, relativePath) {
 	relativePath = path.dirname(cssPath || '.') + '/' + relativePath;
 
+	relativePath = path.relative(process.cwd(), relativePath);
+
 	return relativePath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
 }
 
@@ -82,6 +84,43 @@ function getSafelyQuoted(string) {
 	string = getQuoteless(string);
 
 	return string.match(/\s/) ? '"' + string + '"' : string;
+}
+
+function rebaseUrls(cssDirname) {
+	var fontVariants;
+	var fontVariantNumber;
+	var fontVariantName;
+	var fontVariant;
+	var format;
+	var cwd = process.cwd();
+	var absolutePath;
+	for (var fontName in foundries.hosted) {
+		if (!foundries.hosted.hasOwnProperty(fontName)) {
+			continue;
+		}
+		fontVariants = foundries.hosted[fontName].variants;
+		for (fontVariantNumber in fontVariants) {
+			if (!fontVariants.hasOwnProperty(fontVariantNumber)) {
+				continue;
+			}
+			for (fontVariantName in fontVariants[fontVariantNumber]) {
+				if (!fontVariants[fontVariantNumber].hasOwnProperty(fontVariantName)) {
+					continue;
+				}
+				fontVariant = fontVariants[fontVariantNumber][fontVariantName];
+				if (!fontVariant.hasOwnProperty('url')) {
+					continue;
+				}
+				for (format in fontVariant.url) {
+					if (!fontVariant.url.hasOwnProperty(format)) {
+						continue;
+					}
+					absolutePath = path.join(cwd, fontVariant.url[format]);
+					fontVariant.url[format] = path.relative(cssDirname, absolutePath);
+				}
+			}
+		}
+	}
 }
 
 /* CSS Methods
@@ -232,6 +271,7 @@ function plugin(opts) {
 			foundries.hosted = getDirectoryFonts(
 				getRelativePath(css.source.input.file, opts.hosted)
 			);
+			rebaseUrls(path.dirname(css.source.input.file));
 		} else {
 			// otherwise delete the hosted foundries
 			delete foundries.hosted;
