@@ -193,8 +193,8 @@ require('postcss-font-magician')({
    custom: {
       'My Special Font': {
          variants: {
-            400: {
-               normal: {
+            normal: {
+               400: {
                   url: {
                      woff2: 'path/to/my-special-font.woff2'
                   }
