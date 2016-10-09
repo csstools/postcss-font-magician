@@ -129,15 +129,15 @@ describe('postcss-font-magician', function () {
 		test(
 			'a{font-family:body}b{}',
 
-			'@font-face{font-family:body;font-style:400;font-weight:normal;src:url(path/to/my-body-font.woff2) format("woff2")}' +
+			'@font-face{font-family:body;font-style:normal;font-weight:400;src:url(path/to/my-body-font.woff2) format("woff2")}' +
 			'a{font-family:body}b{}',
 
 			{
 				custom: {
 					body: {
 						variants: {
-							400: {
-								normal: {
+							normal: {
+								400: {
 									url: {
 										woff2: 'path/to/my-body-font.woff2'
 									}
