@@ -156,9 +156,6 @@ function getFontFaceRules(family, opts) {
 					// conditionally return early if no url is available
 					if (!url) return;
 
-					// remove the http/https protocol
-					url = url.replace(/^https?:/, '');
-
 					// add the IE hack
 					if (format === 'eot') url += '?#';
 
