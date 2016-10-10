@@ -1,3 +1,7 @@
+## 1.4.1 (2016-10-10)
+
+Added: `protocol` method
+
 ## 1.4.0 (2015-12-07)
 
 Updated: PostCSS v5 dependency

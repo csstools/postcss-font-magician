@@ -18,7 +18,8 @@ var defaultOptions = {
 	foundries:   ['custom', 'hosted', 'bootstrap', 'google'],
 	formatHints: { otf: 'opentype', ttf: 'truetype' },
 	formats:     ['local', 'eot', 'woff2', 'woff'],
-	hosted:      ''
+	hosted:      '',
+	protocol:    ''
 };
 
 var foundries = {
@@ -157,7 +158,7 @@ function getFontFaceRules(family, opts) {
 					if (!url) return;
 
 					// remove the http/https protocol
-					url = url.replace(/^https?:/, '');
+					url = url.replace(/^https?:/, opts.protocol);
 
 					// add the IE hack
 					if (format === 'eot') url += '?#';
