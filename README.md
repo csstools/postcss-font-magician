@@ -221,12 +221,12 @@ Do you want to control the font URL-address protocol?
 
 ```js
 require('postcss-font-magician')({
-   protocol: 'https'
+   protocol: 'https:'
 });
 ```
 
 By default, 'http/https' protocol is removed from the font url.
-Supports any string values, eg - '', 'http' or 'https'
+Supports any string values, eg - '', 'http:' or 'https:'
 
 ## Future
 
