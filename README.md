@@ -116,7 +116,65 @@ npm install postcss-font-magician --save-dev
 
 ## Options
 
-#### hosted
+### variants
+
+Want to download only specific font weights, styles and formats?
+
+```js
+require('postcss-font-magician')({
+   variants: {
+                'Open Sans': {
+                    '300': ['woff, eot, woff2'],
+                    '400 italic': ['woff2']
+                }
+            }
+});
+```
+
+The plugin will download the font only selected weights, styles and formats.
+
+### unicode-range
+
+Need to support [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)? You can use it as a second element in an option array.
+
+```js
+require('postcss-font-magician')({
+   variants: {
+                'Open Sans': {
+                    '300': ['woff, eot, woff2', 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF'],
+                    '400 italic': ['woff2']
+                }
+            }
+});
+```
+
+### font-stretch
+
+Need to support [font-stretch](https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch)? You can use it as a 2nd or 3rd params in an option key.
+
+```js
+require('postcss-font-magician')({
+   variants: {
+                'Open Sans': {
+                    '300 ultra-condenced': ['woff, eot, woff2'],
+                    '400 italic': ['woff2'],
+                    '400 italic semi-expanded': ['woff2']
+                }
+            }
+});
+```
+
+### font-display
+
+Need to control how custom fonts display when they loading? You can use [font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display) css rule. 
+
+```js
+require('postcss-font-magician')({
+   display: 'swap'
+});
+```
+
+### hosted
 
 Have a directory of self-hosted fonts?
 
@@ -128,7 +186,7 @@ require('postcss-font-magician')({
 
 The directory will be scanned for font files, which will be read and automatically added if they are used in the document.
 
-#### aliases
+### aliases
 
 Prefer another name for particular fonts?
 
@@ -142,7 +200,7 @@ require('postcss-font-magician')({
 
 The `@font-face` rule will be updated so that your alias key is the new name of the font family.
 
-#### async
+### async
 
 Need to load the fonts asynchronously?
 
@@ -154,7 +212,7 @@ require('postcss-font-magician')({
 
 Any `@font-face` rules are moved out of CSS and into a JavaScript file may be added to a page separately. It will automatically load the fonts before using them.
 
-#### formats
+### formats
 
 Want to control which font formats are used?
 
@@ -167,7 +225,7 @@ require('postcss-font-magician')({
 By default, `local`, `woff2`, `woff`, and `eot` are enabled.
 Supported formats include `local`, `woff2`, `woff`, `ttf`, `eot`, `svg`, and `otf`.
 
-#### foundries
+### foundries
 
 Want to enable specific foundries?
 
@@ -227,6 +285,7 @@ require('postcss-font-magician')({
 
 By default, 'http/https' protocol is removed from the font url.
 Supports any string values, eg - '', 'http:' or 'https:'
+
 
 ## Future
 

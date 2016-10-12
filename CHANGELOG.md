@@ -1,3 +1,10 @@
+## 1.5.0 (2016-10-11)
+
+Added: `variants` method
+Added: support of 'font-display'
+Added: support of 'font-stretch'
+Added: support of 'unicode-range'
+
 ## 1.4.1 (2016-10-10)
 
 Added: `protocol` method
