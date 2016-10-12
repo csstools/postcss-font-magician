@@ -238,7 +238,7 @@ require('postcss-font-magician')({
 By default, all foundries are enabled.
 Supported foundries include `custom`, `hosted`, `bootstrap`, and `google`.
 
-#### custom
+### custom
 
 Need something very specific? I can do that, too.
 
@@ -273,7 +273,7 @@ require('postcss-font-magician')({
 });
 ```
 
-#### protocol
+### protocol
 
 Do you want to control the font URL-address protocol?
 
