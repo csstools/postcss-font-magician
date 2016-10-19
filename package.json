@@ -17,6 +17,10 @@
     "web"
   ],
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
+  "contributors": [
+    "Jonathan Neal <jonathantneal@hotmail.com>",
+    "Ruslan Abdullaev <skarlatin@mail.ru>"
+  ],
   "license": "CC0-1.0",
   "repository": {
     "type": "git",
