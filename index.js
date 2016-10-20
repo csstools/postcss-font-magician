@@ -321,7 +321,7 @@ function plugin(options) {
         if (options.hosted && options.foundries.indexOf('hosted') !== -1) {
             // set the hosted fonts by relative directory
             foundries.hosted = getDirectoryFonts(
-                getRelativePath(css.source.input.file, options.hosted);
+                getRelativePath(css.source.input.file, options.hosted)
             );
         } else {
             // otherwise delete the hosted foundries
