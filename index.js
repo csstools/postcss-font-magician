@@ -21,7 +21,7 @@ var arrayOptions = ['foundries', 'foundriesOrder', 'formats'],
             ttf: 'truetype'
         },
         formats: ['local', 'eot', 'woff2', 'woff'],
-        hosted: '',
+        hosted: [],
         display: '',
         protocol: ''
     },
@@ -78,9 +78,10 @@ function getQuoteless(string) {
 }
 
 function getRelativePath(cssPath, relativePath) {
-    relativePath = path.dirname(cssPath || '.') + '/' + relativePath;
-
-    return relativePath.replace(/(^|\/)\.\//g, '$1').replace(/\/$/, '');
+    relativePath = relativePath.toString();
+    cssPath =  cssPath ? path.dirname(cssPath.toString()) : '';
+    relativePath = path.resolve(process.cwd(), relativePath);
+    return path.relative(cssPath, relativePath)
 }
 
 function getSafelyQuoted(string) {
@@ -104,6 +105,10 @@ function splitValue(value) {
           stretch: splittedValue[2] || '',
     };
   }
+}
+
+function removeTrailingSlash(url) {
+    return url.replace(/\/$/, '');
 }
 
 function generateFont(family, fontFaceRules, options, defaultOptions) {
@@ -246,7 +251,7 @@ function getFontFaceRules(family, options) {
         return fontFaceRules;
     }
 
-    if (variants && variants[family]) {
+    if (variants && variants[family] && !options.hosted.length) {
       for (key in variants[family]) {
         splittedValue = splitValue(key);
         weight = splittedValue.weight;
@@ -315,14 +320,40 @@ function plugin(options) {
     // return the plugin
     return function (css) {
         // set font families in use
-        var fontFamiliesDeclared = {};
+        var fontFamiliesDeclared = {},
+            hostedIndex,
+            relativePath,
+            relativeFontPath,
+            hostedOption = options.hosted;
+
 
         // if hosted fonts are present and permitted
-        if (options.hosted && options.foundries.indexOf('hosted') !== -1) {
+        if ( hostedOption.length ) {
+            hostedIndex = options.foundries.indexOf('hosted');
+            if (hostedIndex > 0) {
+              options.foundries.splice(hostedIndex, 1);
+            }
+            options.foundries.unshift('hosted');
+
+            // get the font relative path specified by the user
+            if (typeof hostedOption === 'string' ) {
+              hostedOption =  hostedOption.split();
+            }
+
+            relativePath = removeTrailingSlash( hostedOption[0] );
+
+            // get the relative path relative to the font style file
+            relativeFontPath = css.source.input.file
+              ? getRelativePath( css.source.input.file, relativePath.toString() )
+              : null;
+
+            // use the custom font path specified by the user or the relative path
+            customFontPath = hostedOption[1]
+              ? removeTrailingSlash(hostedOption[1])
+              : relativeFontPath;
+
             // set the hosted fonts by relative directory
-            foundries.hosted = getDirectoryFonts(
-                getRelativePath(css.source.input.file, options.hosted);
-            );
+            foundries.hosted = getDirectoryFonts( relativePath, customFontPath );
         } else {
             // otherwise delete the hosted foundries
             delete foundries.hosted;

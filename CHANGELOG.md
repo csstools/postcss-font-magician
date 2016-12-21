@@ -1,3 +1,7 @@
+## 1.6.0 (2016-12-07)
+
+Changed: added option with custom path in the `hosted` method.
+
 ## 1.5.0 (2016-10-11)
 
 Added: `variants` method
