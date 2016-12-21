@@ -180,11 +180,18 @@ Have a directory of self-hosted fonts?
 
 ```js
 require('postcss-font-magician')({
-   hosted: '../fonts'
+   hosted: ['./src/fonts', [/custom/path/to/fonts/on/site]]
 });
 ```
 
 The directory will be scanned for font files, which will be read and automatically added if they are used in the document.
+
+The first argument of `hosted` array is required and it should be a path that related to the project root. i.e. `./src/fonts`
+In this case, the path to the fonts folder structure must match the structure of the path to the fonts folder on the server, because the path will be relative css file.
+
+The second argument of `hosted` array is optional and it can be an arbitrary path which should match the fonts directory on the site.
+i.e. `/assets/fonts`
+
 
 ### aliases
 
