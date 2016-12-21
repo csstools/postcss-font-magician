@@ -68,6 +68,63 @@ npm install postcss-font-magician --save-dev
    });
    ```
 
+
+### Webpack
+
+1. Add [Font Magician] to your build tool:
+   ```sh
+   npm install postcss-font-magician --save-dev
+   ```
+
+2. Use [Font Magician] in your webpack.config.js:
+
+  *Webpack 1.x*
+
+  ```js
+    postcss: function () {
+      return [
+        ...
+        fontMagician({
+            variants: {
+                'Roboto Condensed': {
+                    '300': [],
+                    '400': [],
+                    '700': []
+                }
+            },
+            foundries: ['google']
+        })
+        ...
+      ];
+  }
+  ```
+
+  *Webpack 2.x*
+
+  ```js
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        ...
+        postcss: [
+          ...
+          fontMagician({
+              variants: {
+                  'Roboto Condensed': {
+                      '300': [],
+                      '400': [],
+                      '700': []
+                  }
+              },
+              foundries: ['google']
+          })
+        ]
+      },
+    }),
+    ...
+  ]
+  ```
+
 ### Grunt
 
 1. Add [Grunt PostCSS] to your build tool:
