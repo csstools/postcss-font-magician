@@ -1,3 +1,7 @@
+## 1.6.1 (2017-03-05)
+
+Updated: google-fonts-complete dependency
+
 ## 1.6.0 (2016-12-07)
 
 Changed: added option with custom path in the `hosted` method.

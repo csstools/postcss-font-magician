@@ -1,6 +1,6 @@
 {
   "name": "postcss-font-magician",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "PostCSS plugin that magically generates all the @font-face rules",
   "keywords": [
     "postcss",
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "google-fonts-complete": "^1.1.1",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.1.1",
     "gulp-mocha": "^2.2.0"

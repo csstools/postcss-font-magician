@@ -1,3 +1,4 @@
 node_modules/
+.vscode/
 npm-debug.log
 test/fontface.js.result
