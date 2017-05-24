@@ -1,3 +1,10 @@
+## 2.0.0 (2017-05-24)
+
+Added: PostCSS 6 compatibility
+Updated: tests via updates to google-fonts-complete
+Updated: package.json, devDependencies chai, gulp, and gulp-eslint
+         (gulp-mocha not updated)
+
 ## 1.6.1 (2017-03-05)
 
 Updated: google-fonts-complete dependency
