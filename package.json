@@ -34,7 +34,7 @@
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.1.0",
     "google-fonts-complete": "^1.1.0",
-    "postcss": "^5.0.12"
+    "postcss": "^6.0.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
