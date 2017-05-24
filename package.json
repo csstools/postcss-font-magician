@@ -37,10 +37,10 @@
     "postcss": "^6.0.1"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "^3.5.0",
     "google-fonts-complete": "^1.1.1",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^2.2.0"
   },
   "scripts": {
