@@ -2,34 +2,24 @@
   "name": "postcss-font-magician",
   "version": "1.6.1",
   "description": "PostCSS plugin that magically generates all the @font-face rules",
-  "keywords": [
-    "postcss",
-    "css",
-    "postcss-plugin",
-    "fonts",
-    "faces",
-    "generate",
-    "generation",
-    "weights",
-    "styles",
-    "variants",
-    "google",
-    "web"
-  ],
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "contributors": [
     "Jonathan Neal <jonathantneal@hotmail.com>",
     "Ruslan Abdullaev <skarlatin@mail.ru>"
   ],
   "license": "CC0-1.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jonathantneal/postcss-font-magician.git"
+  "repository": "jonathantneal/postcss-font-magician",
+  "homepage": "https://github.com/jonathantneal/postcss-font-magician#readme",
+  "bugs": "https://github.com/jonathantneal/postcss-font-magician/issues",
+  "main": "index.js",
+  "scripts": {
+    "clean": "git clean -X -d -f",
+    "prepublish": "npm test",
+    "test": "echo 'Running tests...'; gulp"
   },
-  "bugs": {
-    "url": "https://github.com/jonathantneal/postcss-font-magician/issues"
+  "engines": {
+    "node": ">=4.0.0"
   },
-  "homepage": "https://github.com/jonathantneal/postcss-font-magician",
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.1.0",
@@ -43,7 +33,18 @@
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^2.2.0"
   },
-  "scripts": {
-    "test": "gulp"
-  }
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "fonts",
+    "faces",
+    "generate",
+    "generation",
+    "weights",
+    "styles",
+    "variants",
+    "typography",
+    "type"
+  ]
 }
