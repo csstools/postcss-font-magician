@@ -36,11 +36,12 @@ var arrayOptions = ['foundries', 'foundriesOrder', 'formats'],
    ========================================================================== */
 
 function swapWeightAndStyle(obj) {
-  Object.values(obj).forEach(fontObj => {
+  Object.keys(obj).forEach(function (font) {
+      var fontObj = obj[font]
       var fixedVariant = {}
 
-      Object.keys(fontObj.variants).forEach(weight => {
-        Object.keys(fontObj.variants[weight]).forEach(style => {
+      Object.keys(fontObj.variants).forEach(function (weight) {
+        Object.keys(fontObj.variants[weight]).forEach(function (style) {
 
           if (!fixedVariant[style]) { fixedVariant[style] = {} }
           fixedVariant[style][weight] = fontObj.variants[weight][style]
