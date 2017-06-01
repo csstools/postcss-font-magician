@@ -35,6 +35,23 @@ var arrayOptions = ['foundries', 'foundriesOrder', 'formats'],
 /* Helper Methods
    ========================================================================== */
 
+function swapWeightAndStyle(obj) {
+  Object.values(obj).forEach(fontObj => {
+      var fixedVariant = {}
+
+      Object.keys(fontObj.variants).forEach(weight => {
+        Object.keys(fontObj.variants[weight]).forEach(style => {
+
+          if (!fixedVariant[style]) { fixedVariant[style] = {} }
+          fixedVariant[style][weight] = fontObj.variants[weight][style]
+
+        })
+      })
+
+      fontObj.variants = fixedVariant
+  })
+}
+
 function getConfiguredOptions(options) {
     for (var key in defaultOptions) {
         if (key in options) {
@@ -354,6 +371,8 @@ function plugin(options) {
 
             // set the hosted fonts by relative directory
             foundries.hosted = getDirectoryFonts( relativePath, customFontPath );
+
+            swapWeightAndStyle(foundries.hosted)
         } else {
             // otherwise delete the hosted foundries
             delete foundries.hosted;
