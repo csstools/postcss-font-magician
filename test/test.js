@@ -191,7 +191,7 @@ describe('postcss-font-magician', function () {
     test(
       'a{font-family:"Source Sans Pro"}b{}',
 
-      '@font-face{font-family:"Source Sans Pro";font-style:400;font-weight:normal;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff")}' +
+      '@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff")}' +
       'a{font-family:"Source Sans Pro"}b{}',
 
       {
@@ -205,7 +205,7 @@ describe('postcss-font-magician', function () {
     test(
       'a{font-family:"Source Sans Pro"}b{}',
 
-      '@font-face{font-family:"Source Sans Pro";font-style:400;font-weight:normal;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff")}' +
+      '@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(./test/fonts/pathFont.woff) format("woff")}' +
       'a{font-family:"Source Sans Pro"}b{}',
 
       {
@@ -219,7 +219,7 @@ describe('postcss-font-magician', function () {
     test(
       'a{font-family:"Source Sans Pro"}b{}',
 
-      '@font-face{font-family:"Source Sans Pro";font-style:400;font-weight:normal;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(/some/custom/path/pathFont.woff) format("woff")}' +
+      '@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;src:local(SourceSansPro-Regular),local(SourceSansPro-Regular),url(/some/custom/path/pathFont.woff) format("woff")}' +
       'a{font-family:"Source Sans Pro"}b{}',
 
       {
