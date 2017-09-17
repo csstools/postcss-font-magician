@@ -291,7 +291,7 @@ Supported formats include `local`, `woff2`, `woff`, `ttf`, `eot`, `svg`, and `ot
 
 ### foundries
 
-Want to enable specific foundries?
+Want to enable specific foundries? Provide a space-separated list or array:
 
 ```js
 require('postcss-font-magician')({
