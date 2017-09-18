@@ -1,3 +1,10 @@
+## 2.1.0 (2017-09-18)
+
+Fixed: issue with `hosted` keys
+Updated: tests via updates to google-fonts-complete
+Updated: package.json, devDependencies chai, gulp-eslint, gulp-mocha
+Updated: eslint rules
+
 ## 2.0.0 (2017-05-24)
 
 Added: PostCSS 6 compatibility
