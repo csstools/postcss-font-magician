@@ -264,6 +264,22 @@ require('postcss-font-magician')({
 
 The `@font-face` rule will be updated so that your alias key is the new name of the font family.
 
+You can also use the 'aliases' option with other options, i.g with the 'variants'
+
+
+```js
+require('postcss-font-magician')({
+   aliases: {
+      'sans-serif': 'Source Sans Pro'
+   },
+   variants: {
+      'sans-serif': {
+          '400': ['woff']
+      }
+   }
+});
+```
+
 ### async
 
 Need to load the fonts asynchronously?
