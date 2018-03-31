@@ -15,16 +15,16 @@
   "main": "index.js",
   "scripts": {
     "clean": "git clean -X -d -f",
-    "prepublish": "npm test && npm run lint",
     "precommit": "lint-staged",
-    "test": "echo 'Running tests...'; mocha",
+    "test":
+      "echo 'Running tests...'; ./node_modules/.bin/mocha && npm run lint",
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "lint-staged": {
-    "*.js": ["npm run prepublish --", "git add"]
+    "*.js": ["npm run test --", "git add"]
   },
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
