@@ -1,3 +1,7 @@
+## 2.1.2 (2018-03-31)
+
+Dropped support of Node 4.x
+
 ## 2.1.1 (2018-03-31)
 
 Updated: tests via updates to google-fonts-complete
