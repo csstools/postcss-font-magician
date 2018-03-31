@@ -1,3 +1,10 @@
+## 2.1.1 (2018-03-31)
+
+Updated: tests via updates to google-fonts-complete
+Updated: package.json
+Updated: eslint rules
+Removed: gulp, gulp-eslint, gulp-mocha from devDependencies
+
 ## 2.1.0 (2017-09-18)
 
 Fixed: issue with `hosted` keys

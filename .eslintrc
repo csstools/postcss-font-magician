@@ -117,5 +117,9 @@
   "env": {
     "mocha": true,
     "node":  true
+  },
+  "globals": {
+    "document": true,
+    "window": true
   }
 }

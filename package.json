@@ -1,7 +1,8 @@
 {
   "name": "postcss-font-magician",
-  "version": "2.1.0",
-  "description": "PostCSS plugin that magically generates all the @font-face rules",
+  "version": "2.1.1",
+  "description":
+    "PostCSS plugin that magically generates all the @font-face rules",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "contributors": [
     "Jonathan Neal <jonathantneal@hotmail.com>",
@@ -14,23 +15,29 @@
   "main": "index.js",
   "scripts": {
     "clean": "git clean -X -d -f",
-    "prepublish": "npm test",
-    "test": "echo 'Running tests...'; gulp"
+    "prepublish": "npm test && npm run lint",
+    "precommit": "lint-staged",
+    "test": "echo 'Running tests...'; mocha",
+    "lint": "./node_modules/.bin/eslint index.js"
   },
   "engines": {
     "node": ">=4.0.0"
   },
+  "lint-staged": {
+    "*.js": ["npm run prepublish --", "git add"]
+  },
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.2.0",
-    "google-fonts-complete": "^1.2.0",
+    "google-fonts-complete": "^1.2.1",
     "postcss": "^6.0.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0",
-    "gulp-mocha": "^4.3.1"
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.1",
+    "mocha": "^5.0.5"
   },
   "keywords": [
     "postcss",
