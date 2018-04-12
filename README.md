@@ -41,9 +41,7 @@ Seriously, never write a `@font-face` rule again.
 
 Need more? Request additional magic by [creating an issue].
 
-## Usage
-
-Follow these steps to use [Font Magician]:
+## Installation
 
 Add [Font Magician] to your build tool.
 ```sh
@@ -56,10 +54,11 @@ yarn add postcss-font-magician --dev
 
 ### Node
 
-* Use [Font Magician] in your script:
+Use [Font Magician] in your script:
    ```js
+   const pfm = require('postcss-font-magician');
    postcss([
-      require('postcss-font-magician')({ /* options */ })
+      pfm({ /* options */ })
    ]).process(
       fs.readFileSync('./css/src/style.css', 'utf8')
    ).then(function (result) {
@@ -70,7 +69,7 @@ yarn add postcss-font-magician --dev
 
 ### Webpack
 
-* Use [Font Magician] in your webpack.config.js:
+Use [Font Magician] in your webpack.config.js:
 
   *Webpack 1.x*
 
@@ -119,9 +118,41 @@ yarn add postcss-font-magician --dev
   ]
   ```
 
+  *Webpack 3+*
+
+  **postcss.config.js**
+  ```js
+  module.exports = {
+    plugins: {
+      'postcss-font-magician': {
+           variants: {
+               'Roboto Condensed': {
+                   '300': [],
+                   '400': [],
+                   '700': []
+               }
+           },
+           foundries: ['google']
+      }
+    }
+  }
+  ```
+
+  **webpack.config.js**
+  ```js
+  {
+    loader: 'postcss-loader',
+    options: {
+      config: {
+        path: 'path/to/postcss.config.js'
+      }
+    }
+  }
+  ```
+
 ### Grunt
 
-* Use [Font Magician] in your Gruntfile:
+Use [Font Magician] in your Gruntfile:
    ```js
    grunt.loadNpmTasks('grunt-postcss');
 
@@ -140,7 +171,7 @@ yarn add postcss-font-magician --dev
 
 ### Gulp
 
-* Use [Font Magician] in your Gulpfile:
+Use [Font Magician] in your Gulpfile:
    ```js
    var postcss = require('gulp-postcss');
 
