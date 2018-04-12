@@ -49,15 +49,14 @@ Add [Font Magician] to your build tool.
 ```sh
 npm install postcss-font-magician --save-dev
 ```
+or
+```sh
+yarn add postcss-font-magician --dev
+```
 
 ### Node
 
-1. Add [PostCSS] to your build tool:
-   ```sh
-   npm install postcss --save-dev
-   ```
-
-2. Use [Font Magician] in your script:
+* Use [Font Magician] in your script:
    ```js
    postcss([
       require('postcss-font-magician')({ /* options */ })
@@ -71,12 +70,7 @@ npm install postcss-font-magician --save-dev
 
 ### Webpack
 
-1. Add [Font Magician] to your build tool:
-   ```sh
-   npm install postcss-font-magician --save-dev
-   ```
-
-2. Use [Font Magician] in your webpack.config.js:
+* Use [Font Magician] in your webpack.config.js:
 
   *Webpack 1.x*
 
@@ -127,12 +121,7 @@ npm install postcss-font-magician --save-dev
 
 ### Grunt
 
-1. Add [Grunt PostCSS] to your build tool:
-   ```sh
-   npm install postcss-font-magician --save-dev
-   ```
-
-2. Use [Font Magician] in your Gruntfile:
+* Use [Font Magician] in your Gruntfile:
    ```js
    grunt.loadNpmTasks('grunt-postcss');
 
@@ -151,12 +140,7 @@ npm install postcss-font-magician --save-dev
 
 ### Gulp
 
-1. Add [Gulp PostCSS] to your build tool:
-   ```sh
-   npm install --save-dev gulp-postcss
-   ```
-
-2. Use [Font Magician] in your Gulpfile:
+* Use [Font Magician] in your Gulpfile:
    ```js
    var postcss = require('gulp-postcss');
 
@@ -237,11 +221,13 @@ Have a directory of self-hosted fonts?
 
 ```js
 require('postcss-font-magician')({
-   hosted: ['./src/fonts', [/custom/path/to/fonts/on/site]]
+   hosted: ['./src/fonts', /custom/path/to/fonts/on/site]
 });
 ```
 
 The directory will be scanned for font files, which will be read and automatically added if they are used in the document.
+
+**Please note** that at the moment the plugin doesn't detect woff2 fonts
 
 The first argument of `hosted` array is required and it should be a path that related to the project root. i.e. `./src/fonts`
 In this case, the path to the fonts folder structure must match the structure of the path to the fonts folder on the server, because the path will be relative css file.
