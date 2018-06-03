@@ -38,7 +38,7 @@ var arrayOptions = ['foundries', 'foundriesOrder', 'formats'],
 function getConfiguredOptions(options) {
   for (var key in defaultOptions) {
     if (key in options) {
-      if (arrayOptions.indexOf(key) && typeof options[key] === 'string') {
+      if (arrayOptions.indexOf(key) !== -1 && typeof options[key] === 'string') {
         options[key] = options[key].replace(',', ' ').split(/\s+/);
       }
     } else {
