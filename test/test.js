@@ -5,6 +5,12 @@ var plugin = require('../');
 
 var test = function (input, output, opts, done) {
   postcss([plugin(opts)]).process(input).then(function (result) {
+    result.root.walkAtRules('font-face', function (rule) {
+      rule.walkDecls(function (decl) {
+        expect(typeof decl.value).to.eql('string');
+      });
+    });
+
     expect(result.css).to.eql(output);
 
     expect(result.warnings()).to.be.empty;
