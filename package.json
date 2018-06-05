@@ -1,8 +1,7 @@
 {
   "name": "postcss-font-magician",
-  "version": "2.1.1",
-  "description":
-    "PostCSS plugin that magically generates all the @font-face rules",
+  "version": "2.2.0",
+  "description": "PostCSS plugin that magically generates all the @font-face rules",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "contributors": [
     "Jonathan Neal <jonathantneal@hotmail.com>",
@@ -16,28 +15,33 @@
   "scripts": {
     "clean": "git clean -X -d -f",
     "precommit": "lint-staged",
-    "test":
-      "echo 'Running tests...'; ./node_modules/.bin/mocha && npm run lint",
+    "test": "echo 'Running tests...'; ./node_modules/.bin/mocha && npm run lint",
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.4.0"
   },
   "lint-staged": {
-    "*.js": ["npm run test --", "git add"]
+    "*.js": [
+      "npm run test --",
+      "git add"
+    ]
   },
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.2.0",
     "google-fonts-complete": "^1.2.1",
-    "postcss": "^6.0.1"
+    "postcss": "^6.0.22"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.1",
-    "mocha": "^5.0.5"
+    "mocha": "^5.2.0",
+    "prettier": "^1.13.4"
   },
   "keywords": [
     "postcss",

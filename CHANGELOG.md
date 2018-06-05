@@ -1,3 +1,9 @@
+## 2.2.0 (2018-06-05)
+
+Fixed: issue with array options
+Updated: package.json
+Updated: eslint rules
+
 ## 2.1.2 (2018-03-31)
 
 Dropped support of Node 4.x
