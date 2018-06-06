@@ -1,6 +1,6 @@
 {
   "name": "postcss-font-magician",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "PostCSS plugin that magically generates all the @font-face rules",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "contributors": [
@@ -30,7 +30,7 @@
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.2.0",
-    "google-fonts-complete": "^1.2.1",
+    "google-fonts-complete": "^1.2.2",
     "postcss": "^6.0.22"
   },
   "devDependencies": {

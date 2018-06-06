@@ -1,3 +1,8 @@
+## 2.2.1 (2018-06-06)
+
+Updated: google-fonts-complete dependency
+
+
 ## 2.2.0 (2018-06-05)
 
 Fixed: issue with array options

@@ -756,9 +756,9 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-google-fonts-complete@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/google-fonts-complete/-/google-fonts-complete-1.2.1.tgz#0be144d963f1af51de96ec0a34a814e6461b8bea"
+google-fonts-complete@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/google-fonts-complete/-/google-fonts-complete-1.2.2.tgz#3ad95d4022a2f278acc41d4539b33a2899e8f76c"
   dependencies:
     postcss "^4.1.16"
 
