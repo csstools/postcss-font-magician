@@ -344,4 +344,15 @@ describe('postcss-font-magician', function() {
             done
         );
     });
+
+    it('supports ignoring a declaration', function(done) {
+        test(
+            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
+
+            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
+
+            {},
+            done
+        );
+    });
 });

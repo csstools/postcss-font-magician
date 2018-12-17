@@ -320,6 +320,18 @@ function getFontFaceRules(family, options) {
     return fontFaceRules;
 }
 
+function isRuleIgnored(rule) {
+    var previous = rule.prev();
+
+    if (
+        previous &&
+        previous.type === 'comment' &&
+        /(!\s*)?font-magician:\s*ignore\s+next/i.test(previous.text)
+    ) {
+        return true;
+    }
+}
+
 function plugin(options) {
     // get configured option
     options = getConfiguredOptions(options || {});
@@ -387,7 +399,7 @@ function plugin(options) {
             var family = getFirstFontFamily(decl);
 
             // if the font family is not declared
-            if (!fontFamiliesDeclared[family]) {
+            if (!fontFamiliesDeclared[family] && !isRuleIgnored(decl)) {
                 // set the font family as declared
                 fontFamiliesDeclared[family] = true;
 
