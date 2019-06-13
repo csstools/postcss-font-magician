@@ -1,7 +1,11 @@
+## 2.2.2 (2019-06-13)
+
+Updated: google-fonts-complete dependency
+Updated: dev dependecies
+
 ## 2.2.1 (2018-06-06)
 
 Updated: google-fonts-complete dependency
-
 
 ## 2.2.0 (2018-06-05)
 
