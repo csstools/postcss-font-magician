@@ -1,42 +1,39 @@
-/* Required
-   ========================================================================== */
+// Required
 
 const fs = require('fs');
 const path = require('path');
 const postcss = require('postcss');
 const getDirectoryFonts = require('directory-fonts-complete');
 
-/* Options
-   ========================================================================== */
+// Options
 
-const arrayOptions = ['foundries', 'foundriesOrder', 'formats', 'hosted'];
+const arrayOptions = [ 'foundries', 'foundriesOrder', 'formats', 'hosted' ];
 const defaultOptions = {
     async: false,
     aliases: {},
     variants: {},
     custom: {},
-    foundries: ['custom', 'hosted', 'bootstrap', 'google'],
+    foundries: [ 'custom', 'hosted', 'bootstrap', 'google' ],
     formatHints: {
         otf: 'opentype',
         ttf: 'truetype'
     },
-    formats: ['local', 'eot', 'woff2', 'woff'],
+    formats: [ 'local', 'eot', 'woff2', 'woff' ],
     hosted: [],
     display: '',
     protocol: ''
 };
-const foundries = {
+const initialFoundries = {
     custom: {},
     hosted: {},
     bootstrap: require('bootstrap-fonts-complete'),
     google: require('google-fonts-complete')
 };
 
-/* Helper Methods
-   ========================================================================== */
+// Helper Methods
 
-function getConfiguredOptions(options) {
-    for (var key in defaultOptions) {
+const getConfiguredOptions = options => {
+    for (let key in defaultOptions) {
         if (key in options) {
             if (arrayOptions.includes(key) && typeof options[key] === 'string') {
                 options[key] = options[key].replace(',', ' ').split(/\s+/);
@@ -47,52 +44,59 @@ function getConfiguredOptions(options) {
     }
 
     return options;
-}
+};
 
-function getFont(family, options) {
-    var index = -1,
-        foundryName,
-        foundry;
-
+const getFont = (family, foundries, options) => {
     family = options.aliases[family] || family;
 
-    while ((foundryName = options.foundries[++index])) {
-        foundry = foundries[foundryName];
-
+    for (let foundryName of options.foundries) {
+        const foundry = foundries[foundryName];
         if (foundry && family in foundry) {
             return foundry[family];
         }
     }
-}
+    return null;
+};
 
-function getFormatHint(formatHints, extension) {
+const getFormatHint = (formatHints, extension) => {
     return '"' + (formatHints[extension] || extension) + '"';
-}
+};
 
-function getMethod(name, params) {
-    return name + '(' + params + ')';
-}
+const getMethod = (name, params) => name + '(' + params + ')';
 
-function getQuoteless(string) {
-    return string.replace(/^(['"])(.+)\1$/g, '$2');
-}
+const getQuoteless = str => str.replace(/^(['"])(.+)\1$/g, '$2');
 
-function getRelativePath(cssPath, relativePath) {
+const getUnicodeRange = (font, userRange) => {
+    if (!userRange) {
+        return null;
+    }
+    const isValidUnicodeRange = /^U\+[0-9a-fA-F\-, ]+/g.test(userRange);
+
+    const unicodeRangeList = userRange.replace(/\s/g, '').split(',');
+    const isUserUnicodeRangeExist = unicodeRangeList.every(range => range in font.unicodeRange);
+    if (font.unicodeRange && !isValidUnicodeRange && isUserUnicodeRangeExist) {
+        return unicodeRangeList.map(range => font.unicodeRange[range]);
+    } else {
+        return [ userRange.toUpperCase() ];
+    }
+};
+
+const getRelativePath = (cssPath, relativePath) => {
     cssPath = cssPath ? path.dirname(cssPath.toString()) : '';
     relativePath = path.resolve(process.cwd(), relativePath.toString());
     return path.relative(cssPath, relativePath);
-}
+};
 
-function getSafelyQuoted(string) {
-    string = getQuoteless(string);
-    return string.match(/\s/) ? '"' + string + '"' : string;
-}
+const getSafelyQuoted = str => {
+    str = getQuoteless(str);
+    return str.match(/\s/) ? '"' + str + '"' : str;
+};
 
-function splitValue(value) {
-    var splittedValue = value.split(' ');
+const splitValue = value => {
+    let splittedValue = value.split(' ');
 
     if (splittedValue.length) {
-        if (!splittedValue[1] || (splittedValue[1] !== 'normal' && splittedValue[1] !== 'italic')) {
+        if (!splittedValue[1] || ![ 'normal', 'italic' ].includes(splittedValue[1])) {
             splittedValue.splice(1, 0, 'normal');
         }
 
@@ -102,32 +106,28 @@ function splitValue(value) {
             stretch: splittedValue[2] || ''
         };
     }
-}
+};
 
-function removeTrailingSlash(url) {
-    return url.replace(/\/$/, '');
-}
+const removeTrailingSlash = url => url.replace(/\/$/, '');
 
-function generateFont(family, fontFaceRules, options, defaultOptions) {
+const generateFont = (family, fontFaceRules, options, defaultOptions) => {
     // set the sources array
-    var sources = [],
+    let sources = [],
         formats = options.formats || defaultOptions.formats;
 
     // for each format
-    formats.forEach(function(format) {
-        var url, formatHint, source;
-
+    formats.forEach(format => {
         // if the format is local
         if (format === 'local' && options.urls.local) {
             // for each local font
-            options.urls.local.forEach(function(local) {
+            options.urls.local.forEach(local => {
                 // set the source as the local font
-                var localSource = getMethod('local', getSafelyQuoted(local));
+                const localSource = getMethod('local', getSafelyQuoted(local));
                 // add the source to the sources array
                 sources.push(localSource);
             });
         } else if (options.urls.url) {
-            url = options.urls.url[format];
+            let url = options.urls.url[format];
             // conditionally return early if no url is available
             if (!url) return;
 
@@ -140,8 +140,8 @@ function generateFont(family, fontFaceRules, options, defaultOptions) {
             }
 
             // set the format hint and set the source as the url and format hint
-            formatHint = getFormatHint(defaultOptions.formatHints, format);
-            source = getMethod('url', url) + ' ' + getMethod('format', formatHint);
+            const formatHint = getFormatHint(defaultOptions.formatHints, format);
+            const source = getMethod('url', url) + ' ' + getMethod('format', formatHint);
             sources.push(source);
         }
     });
@@ -149,51 +149,32 @@ function generateFont(family, fontFaceRules, options, defaultOptions) {
     // if the sources array is filled
     if (sources.length) {
         // create a font face rule
-        var fontFaceRule = postcss.atRule({
+        let fontFaceRule = postcss.atRule({
             name: 'font-face'
         });
 
-        // append a font-family declaration
         fontFaceRule.append(
+            // append a font-family declaration
             postcss.decl({
                 prop: 'font-family',
                 value: getSafelyQuoted(family)
-            })
-        );
-
-        // append a font-style declaration
-        fontFaceRule.append(
+            }),
+            // append a font-style declaration
             postcss.decl({
                 prop: 'font-style',
                 value: options.style
-            })
-        );
-
-        // append a font-weight declaration
-        fontFaceRule.append(
+            }),
+            // append a font-weight declaration
             postcss.decl({
                 prop: 'font-weight',
                 value: options.weight
-            })
-        );
-
-        // append a src declaration
-        fontFaceRule.append(
+            }),
+            // append a src declaration
             postcss.decl({
                 prop: 'src',
                 value: sources.join(',')
             })
         );
-
-        // append an unicode-range declaration
-        if (options.ranges) {
-            fontFaceRule.append(
-                postcss.decl({
-                    prop: 'unicode-range',
-                    value: options.ranges
-                })
-            );
-        }
 
         // append a font-stretch declaration
         if (options.stretch) {
@@ -215,47 +196,49 @@ function generateFont(family, fontFaceRules, options, defaultOptions) {
             );
         }
 
-        // return the font face rules array
-        return [].concat(fontFaceRules, fontFaceRule);
-    } else {
-        return fontFaceRules;
+        // append an unicode-range declaration
+        if (options.ranges) {
+            options.ranges.forEach(range => {
+                fontFaceRules.push(
+                    fontFaceRule.clone().append(
+                        postcss.decl({
+                            prop: 'unicode-range',
+                            value: range
+                        })
+                    )
+                );
+            });
+        } else {
+            fontFaceRules.push(fontFaceRule);
+        }
     }
-}
 
-/* CSS Methods
-   ========================================================================== */
+    return fontFaceRules;
+};
 
-function getValueByDeclaration(rule, property) {
-    var index = -1,
-        declaration;
+// CSS Methods
 
-    while ((declaration = rule.nodes[++index])) {
+const getValueByDeclaration = (rule, property) => {
+    for (const declaration of rule.nodes) {
         if (declaration.prop === property) {
             return declaration.value;
         }
     }
 
     return '';
-}
+};
 
-function getFirstFontFamily(decl) {
-    return getQuoteless(postcss.list.space(postcss.list.comma(decl.value)[0]).slice(-1)[0]);
-}
+const getFirstFontFamily = decl => getQuoteless(
+    postcss.list.space(
+        postcss.list.comma(decl.value)[0]
+    ).slice(-1)[0]
+);
 
-function getFontFaceRules(family, options) {
-    var weight,
-        style,
-        formats,
-        ranges,
-        stretch,
-        googleWeights,
-        key,
-        splittedValue,
-        // set the font face rules array
-        fontFaceRules = [],
-        // get the font
-        font = getFont(family, options),
-        variants = options.variants;
+function getFontFaceRules(family, foundries, options) {
+    let fontFaceRules = [];
+    const font = getFont(family, foundries, options);
+
+    const variants = options.variants;
 
     // conditionally return early if no font is found
     if (!font) {
@@ -263,49 +246,47 @@ function getFontFaceRules(family, options) {
     }
 
     if (variants && variants[family] && !options.hosted.length) {
-        for (key in variants[family]) {
-            splittedValue = splitValue(key);
-            weight = splittedValue.weight;
-            style = splittedValue.style;
-            stretch = splittedValue.stretch;
-            formats = variants[family][key][0]
-                ? variants[family][key][0].replace(/\W+/g, ' ').split(' ')
+        Object.keys(variants[family]).forEach(key => {
+            const variant = variants[family][key];
+            const { weight, style, stretch } = splitValue(key);
+            const formats = variant[0]
+                ? variant[0].replace(/\W+/g, ' ').split(' ')
                 : options.formats;
-            ranges = variants[family][key][1] ? variants[family][key][1].toUpperCase() : null;
-            googleWeights = font.variants[style];
+            const ranges = getUnicodeRange(font, variant[1]);
+            const googleWeights = font.variants[style];
 
             if (googleWeights && googleWeights[weight]) {
                 fontFaceRules = generateFont(
                     family,
                     fontFaceRules,
                     {
-                        style: style,
+                        style,
                         urls: googleWeights[weight],
-                        weight: weight,
-                        formats: formats,
-                        ranges: ranges,
-                        stretch: stretch,
+                        weight,
+                        formats,
+                        ranges,
+                        stretch,
                         display: options.display
                     },
                     options
                 );
             }
-        }
+        });
     } else {
         // for each font style
-        Object.keys(font.variants).forEach(function(style) {
+        Object.keys(font.variants).forEach(style => {
             // set the font weights
-            var weights = font.variants[style];
+            const weights = font.variants[style];
             // for each font weight
-            Object.keys(weights).forEach(function(weight) {
-                var urls = weights[weight];
+            Object.keys(weights).forEach(weight => {
+                const urls = weights[weight];
                 fontFaceRules = generateFont(
                     family,
                     fontFaceRules,
                     {
-                        style: style,
-                        urls: urls,
-                        weight: weight,
+                        style,
+                        urls,
+                        weight,
                         formats: null,
                         ranges: null,
                         stretch: null,
@@ -320,45 +301,42 @@ function getFontFaceRules(family, options) {
     return fontFaceRules;
 }
 
-function plugin(options) {
+function plugin(initialOptions) {
     // get configured option
-    options = getConfiguredOptions(options || {});
+    const options = getConfiguredOptions(initialOptions || {});
     // set the custom foundry
-    foundries.custom = options.custom;
+    const foundries = {
+        ...initialFoundries,
+        custom: options.custom
+    };
 
     // return the plugin
     return function(css) {
         // set font families in use
-        var fontFamiliesDeclared = {},
-            hostedIndex,
-            relativePath,
-            relativeFontPath,
-            customFontPath;
-
-        var hostedOption = options.hosted;
+        let fontFamiliesDeclared = {};
+        let hostedOption = options.hosted;
 
         // if hosted fonts are present and permitted
         if (hostedOption.length) {
-            hostedIndex = options.foundries.indexOf('hosted');
-            if (hostedIndex > 0) {
-                options.foundries.splice(hostedIndex, 1);
-            }
-            options.foundries.unshift('hosted');
+            options.foundries = [
+                'hosted',
+                ...options.foundries.filter(f => f !== 'hosted')
+            ];
 
-            // get the font relative path specified by the user
+            // get the relative font path specified by the user
             if (typeof hostedOption === 'string') {
                 hostedOption = hostedOption.split();
             }
 
-            relativePath = removeTrailingSlash(hostedOption[0]);
+            const relativePath = removeTrailingSlash(hostedOption[0]);
 
-            // get the relative path relative to the font style file
-            relativeFontPath = css.source.input.file
+            // get the relative path to the font style file
+            const relativeFontPath = css.source.input.file
                 ? getRelativePath(css.source.input.file, relativePath.toString())
                 : null;
 
             // use the custom font path specified by the user or the relative path
-            customFontPath = hostedOption[1]
+            const customFontPath = hostedOption[1]
                 ? removeTrailingSlash(hostedOption[1])
                 : relativeFontPath;
 
@@ -370,11 +348,11 @@ function plugin(options) {
         }
 
         // for each font face rule
-        css.walkAtRules('font-face', function(rule) {
+        css.walkAtRules('font-face', rule => {
             // for each font-family declaration
-            rule.walkDecls('font-family', function(decl) {
+            rule.walkDecls('font-family', decl => {
                 // set the font family
-                var family = getQuoteless(decl.value);
+                const family = getQuoteless(decl.value);
 
                 // set the font family as declared
                 fontFamiliesDeclared[family] = true;
@@ -382,9 +360,9 @@ function plugin(options) {
         });
 
         // for each font declaration
-        css.walkDecls(/^font(-family)?$/, function(decl) {
+        css.walkDecls(/^font(-family)?$/, decl => {
             // set the font family as the first declared font family
-            var family = getFirstFontFamily(decl);
+            const family = getFirstFontFamily(decl);
 
             // if the font family is not declared
             if (!fontFamiliesDeclared[family]) {
@@ -392,7 +370,7 @@ function plugin(options) {
                 fontFamiliesDeclared[family] = true;
 
                 // set the font face rules
-                var fontFaceRules = getFontFaceRules(family, options);
+                const fontFaceRules = getFontFaceRules(family, foundries, options);
 
                 // if the font face rules array is filled
                 if (fontFaceRules.length) {
@@ -403,10 +381,10 @@ function plugin(options) {
         });
 
         if (options.async) {
-            var fontFaces = [];
+            let fontFaces = [];
 
             // for each font face rule
-            css.walkAtRules('font-face', function(rule) {
+            css.walkAtRules('font-face', rule => {
                 rule.remove();
 
                 fontFaces.push({
@@ -418,9 +396,9 @@ function plugin(options) {
             });
 
             if (fontFaces) {
-                var asyncPath = getRelativePath(css.source.input.file, options.async);
+                const asyncPath = getRelativePath(css.source.input.file, options.async);
 
-                var asyncJs =
+                const asyncJs =
                     '(function(){' +
                     fs.readFileSync('loader.min.js', 'utf8') +
                     'loadFonts(' +

@@ -1,3 +1,13 @@
+## 2.3.0 (2019-11-11)
+
+Added: Support of Google fonts unicode-range subsets
+Fixed: refactoring the plugin script
+Updated: google-fonts-complete dependency
+Updated: dev dependecies
+Updated: package.json
+Updated: eslint rules
+
+
 ## 2.2.2 (2019-06-13)
 
 Updated: google-fonts-complete dependency
