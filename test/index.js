@@ -60,7 +60,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:"Alice"}b{}',
 
-            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
+            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
             {},
             done
         );
@@ -70,7 +70,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:"Alice"}b{}',
 
-            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgg.woff) format("woff");font-display:swap}a{font-family:"Alice"}b{}',
+            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgg.woff) format("woff");font-display:swap}a{font-family:"Alice"}b{}',
             { display: 'swap' },
             done
         );
@@ -81,7 +81,7 @@ describe('postcss-font-magician', function() {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff")}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff")}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
                 {
                     variants: {
                         'Open Sans': {
@@ -98,7 +98,7 @@ describe('postcss-font-magician', function() {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:local("Open Sans Light"),local(OpenSans-Light),url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuht.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format("woff2"),url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff")}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:local("Open Sans Light"),local(OpenSans-Light),url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOht.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format("woff2"),url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff")}a{font-family:"Open Sans"}b{}',
 
                 {
                     variants: {
@@ -115,7 +115,7 @@ describe('postcss-font-magician', function() {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff");unicode-range:U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff");unicode-range:U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
                 {
                     variants: {
                         'Open Sans': {
@@ -131,11 +131,31 @@ describe('postcss-font-magician', function() {
             );
         });
 
+        it('supports custom unicode-range (google subsets)', function(done) {
+            test(
+                'a{font-family:"Open Sans"}b{}',
+
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format("woff2");unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format("woff2");unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Zdc0.woff2) format("woff2");unicode-range:U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB}a{font-family:"Open Sans"}b{}',
+                {
+                    variants: {
+                        'Open Sans': {
+                            '300': [
+                                'woff2',
+                                'cyrillic, latin-ext'
+                            ],
+                            '400 italic': ['woff2', 'vietnamese']
+                        }
+                    }
+                },
+                done
+            );
+        });
+
         it('supports custom font-stretch: omit "normal" style', function(done) {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff");font-stretch:condensed}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff");font-stretch:condensed}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
                 {
                     variants: {
                         'Open Sans': {
@@ -152,7 +172,7 @@ describe('postcss-font-magician', function() {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff");font-stretch:condensed}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff");font-stretch:condensed}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdcs.woff) format("woff")}a{font-family:"Open Sans"}b{}',
                 {
                     variants: {
                         'Open Sans': {
@@ -169,7 +189,7 @@ describe('postcss-font-magician', function() {
             test(
                 'a{font-family:"Open Sans"}b{}',
 
-                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN_r8OUuhv.woff) format("woff")}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v16/mem6YaGs126MiZpBA-UFUK0Zdcs.woff) format("woff");font-stretch:ultra-condensed}a{font-family:"Open Sans"}b{}',
+                '@font-face{font-family:"Open Sans";font-style:normal;font-weight:300;src:url(//fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhv.woff) format("woff")}@font-face{font-family:"Open Sans";font-style:italic;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdck.eot?#) format("eot"),url(//fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdcs.woff) format("woff");font-stretch:ultra-condensed}a{font-family:"Open Sans"}b{}',
                 {
                     variants: {
                         'Open Sans': {
@@ -187,7 +207,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:"Alice"}b{font-family:"Alice"}',
 
-            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{font-family:"Alice"}',
+            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(//fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{font-family:"Alice"}',
 
             {},
             done
@@ -264,7 +284,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:body}b{}',
 
-            '@font-face{font-family:body;font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0d.woff) format("woff")}a{font-family:body}b{}',
+            '@font-face{font-family:body;font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFW50d.woff) format("woff")}a{font-family:body}b{}',
 
             {
                 aliases: {
@@ -323,7 +343,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:"Alice"}b{}',
 
-            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(http://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(http://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(http://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
+            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(http://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(http://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(http://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
 
             {
                 protocol: 'http:'
@@ -336,7 +356,7 @@ describe('postcss-font-magician', function() {
         test(
             'a{font-family:"Alice"}b{}',
 
-            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(https://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(https://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(https://fonts.gstatic.com/s/alice/v10/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
+            '@font-face{font-family:Alice;font-style:normal;font-weight:400;src:local("Alice Regular"),local(Alice-Regular),url(https://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgo.eot?#) format("eot"),url(https://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrg4.woff2) format("woff2"),url(https://fonts.gstatic.com/s/alice/v11/OpNCnoEEmtHa6GcOrgg.woff) format("woff")}a{font-family:"Alice"}b{}',
 
             {
                 protocol: 'https:'

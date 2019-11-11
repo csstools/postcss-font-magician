@@ -56,6 +56,8 @@ yarn add postcss-font-magician --dev
 
 Use [Font Magician] in your script:
    ```js
+   const fs = require('fs');
+   const postcss = require('postcss');
    const pfm = require('postcss-font-magician');
    postcss([
       pfm({ /* options */ })
@@ -207,14 +209,14 @@ The plugin will download the font only selected weights, styles and formats.
 
 ### unicode-range
 
-Need to support [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)? You can use it as a second element in an option array.
+Need to support [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range)? You can use both the names of the subsets of Google fonts (e.g. 'latin-ext' or 'cyrillic') and specific unicode ranges values. You can use it as a second element in an option array.
 
 ```js
 require('postcss-font-magician')({
    variants: {
                 'Open Sans': {
-                    '300': ['woff, eot, woff2', 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF'],
-                    '400 italic': ['woff2']
+                    '300': ['woff2', 'cyrillic-ext, greek'],
+                    '400 italic': ['woff2', 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF']
                 }
             }
 });
