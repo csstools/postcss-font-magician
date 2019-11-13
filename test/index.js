@@ -364,4 +364,15 @@ describe('postcss-font-magician', function() {
             done
         );
     });
+
+    it('supports Material Icons', function(done) {
+        test(
+            'a{font-family:"Material Icons"}b{}',
+
+            '@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNY.eot?#) format("eot"),url(//fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2"),url(//fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff) format("woff")}a{font-family:"Material Icons"}b{}',
+
+            {},
+            done
+        );
+    });
 });
