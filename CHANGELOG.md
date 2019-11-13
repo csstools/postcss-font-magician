@@ -1,11 +1,9 @@
-## 2.3.0 (2019-11-11)
+## 2.3.1 (2019-11-13)
 
-Added: Support of Google fonts unicode-range subsets
-Fixed: refactoring the plugin script
+Added: Support of Material Icons font
 Updated: google-fonts-complete dependency
 Updated: dev dependecies
 Updated: package.json
-Updated: eslint rules
 
 
 ## 2.2.2 (2019-06-13)

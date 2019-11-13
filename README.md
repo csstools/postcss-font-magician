@@ -32,6 +32,12 @@ body {
 ```
 
 * Want to use **[Google Fonts](#foundries)**? I’ll add them for you.
+* Want to use **Material Icons**? 
+```css
+body {
+   font-family: "Material Icons";
+}
+```
 * Want to use the visitor’s **local** copy of a font? Done.
 * Want to **[host](#hosted)** your own fonts? Just tell me where they are, and I’ll do the rest.
 * Want to load a font **[async](#async)** and only use it after it has been loaded? I can do that too.
