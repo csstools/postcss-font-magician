@@ -311,106 +311,110 @@ function plugin(initialOptions) {
     };
 
     // return the plugin
-    return function(css) {
-        // set font families in use
-        let fontFamiliesDeclared = {};
-        let hostedOption = options.hosted;
+    return {
+        postcssPlugin: 'postcss-font-magician',
+        Once(root, { result }) {
+            // set font families in use
+            let fontFamiliesDeclared = {};
+            let hostedOption = options.hosted;
 
-        // if hosted fonts are present and permitted
-        if (hostedOption.length) {
-            options.foundries = [
-                'hosted',
-                ...options.foundries.filter(f => f !== 'hosted')
-            ];
+            // if hosted fonts are present and permitted
+            if (hostedOption.length) {
+                options.foundries = [
+                    'hosted',
+                    ...options.foundries.filter(f => f !== 'hosted')
+                ];
 
-            // get the relative font path specified by the user
-            if (typeof hostedOption === 'string') {
-                hostedOption = hostedOption.split();
-            }
-
-            const relativePath = removeTrailingSlash(hostedOption[0]);
-
-            // get the relative path to the font style file
-            const relativeFontPath = css.source.input.file
-                ? getRelativePath(css.source.input.file, relativePath.toString())
-                : null;
-
-            // use the custom font path specified by the user or the relative path
-            const customFontPath = hostedOption[1]
-                ? removeTrailingSlash(hostedOption[1])
-                : relativeFontPath;
-
-            // set the hosted fonts by relative directory
-            foundries.hosted = getDirectoryFonts(relativePath, customFontPath, true);
-        } else {
-            // otherwise delete the hosted foundries
-            delete foundries.hosted;
-        }
-
-        // for each font face rule
-        css.walkAtRules('font-face', rule => {
-            // for each font-family declaration
-            rule.walkDecls('font-family', decl => {
-                // set the font family
-                const family = getQuoteless(decl.value);
-
-                // set the font family as declared
-                fontFamiliesDeclared[family] = true;
-            });
-        });
-
-        // for each font declaration
-        css.walkDecls(/^font(-family)?$/, decl => {
-            // set the font family as the first declared font family
-            const family = getFirstFontFamily(decl);
-
-            // if the font family is not declared
-            if (!fontFamiliesDeclared[family]) {
-                // set the font family as declared
-                fontFamiliesDeclared[family] = true;
-
-                // set the font face rules
-                const fontFaceRules = getFontFaceRules(family, foundries, options);
-
-                // if the font face rules array is filled
-                if (fontFaceRules.length) {
-                    // prepend the font face rules
-                    css.prepend(fontFaceRules);
+                // get the relative font path specified by the user
+                if (typeof hostedOption === 'string') {
+                    hostedOption = hostedOption.split();
                 }
-            }
-        });
 
-        if (options.async) {
-            let fontFaces = [];
+                const relativePath = removeTrailingSlash(hostedOption[0]);
+
+                // get the relative path to the font style file
+                const relativeFontPath = root.source.input.file
+                    ? getRelativePath(root.source.input.file, relativePath.toString())
+                    : null;
+
+                // use the custom font path specified by the user or the relative path
+                const customFontPath = hostedOption[1]
+                    ? removeTrailingSlash(hostedOption[1])
+                    : relativeFontPath;
+
+                // set the hosted fonts by relative directory
+                foundries.hosted = getDirectoryFonts(relativePath, customFontPath, true);
+            } else {
+                // otherwise delete the hosted foundries
+                delete foundries.hosted;
+            }
 
             // for each font face rule
-            css.walkAtRules('font-face', rule => {
-                rule.remove();
+            root.walkAtRules('font-face', rule => {
+                // for each font-family declaration
+                rule.walkDecls('font-family', decl => {
+                    // set the font family
+                    const family = getQuoteless(decl.value);
 
-                fontFaces.push({
-                    family: getValueByDeclaration(rule, 'font-family'),
-                    weight: getValueByDeclaration(rule, 'font-weight'),
-                    style: getValueByDeclaration(rule, 'font-style'),
-                    src: getValueByDeclaration(rule, 'src')
+                    // set the font family as declared
+                    fontFamiliesDeclared[family] = true;
                 });
             });
 
-            if (fontFaces) {
-                const asyncPath = getRelativePath(css.source.input.file, options.async);
+            // for each font declaration
+            root.walkDecls(/^font(-family)?$/, decl => {
+                // set the font family as the first declared font family
+                const family = getFirstFontFamily(decl);
 
-                const asyncJs =
-                    '(function(){' +
-                    fs.readFileSync('loader.min.js', 'utf8') +
-                    'loadFonts(' +
-                    JSON.stringify(fontFaces) +
-                    ')' +
-                    '})()';
+                // if the font family is not declared
+                if (!fontFamiliesDeclared[family]) {
+                    // set the font family as declared
+                    fontFamiliesDeclared[family] = true;
 
-                fs.writeFileSync(asyncPath, asyncJs);
+                    // set the font face rules
+                    const fontFaceRules = getFontFaceRules(family, foundries, options);
+
+                    // if the font face rules array is filled
+                    if (fontFaceRules.length) {
+                        // prepend the font face rules
+                        root.prepend(fontFaceRules);
+                    }
+                }
+            });
+
+            if (options.async) {
+                let fontFaces = [];
+
+                // for each font face rule
+                root.walkAtRules('font-face', rule => {
+                    rule.remove();
+
+                    fontFaces.push({
+                        family: getValueByDeclaration(rule, 'font-family'),
+                        weight: getValueByDeclaration(rule, 'font-weight'),
+                        style: getValueByDeclaration(rule, 'font-style'),
+                        src: getValueByDeclaration(rule, 'src')
+                    });
+                });
+
+                if (fontFaces) {
+                    const asyncPath = getRelativePath(root.source.input.file, options.async);
+
+                    const asyncJs =
+                        '(function(){' +
+                        fs.readFileSync('loader.min.js', 'utf8') +
+                        'loadFonts(' +
+                        JSON.stringify(fontFaces) +
+                        ')' +
+                        '})()';
+
+                    fs.writeFileSync(asyncPath, asyncJs);
+                }
             }
         }
     };
 }
 
 // set plugin
-module.exports = postcss.plugin('postcss-font-magician', plugin);
+module.exports.postcss = true;
+module.exports = plugin;

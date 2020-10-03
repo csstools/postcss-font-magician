@@ -51,11 +51,11 @@ Need more? Request additional magic by [creating an issue].
 
 Add [Font Magician] to your build tool.
 ```sh
-npm install postcss-font-magician --save-dev
+npm install postcss postcss-font-magician --save-dev
 ```
 or
 ```sh
-yarn add postcss-font-magician --dev
+yarn add postcss postcss-font-magician --dev
 ```
 
 ### Node

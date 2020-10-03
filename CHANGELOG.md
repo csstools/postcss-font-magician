@@ -1,3 +1,12 @@
+## 3.0.0 (2020-10-03)
+
+Dropped support of Node.js 6.x, 8.x, 11.x, and 13.x
+
+Added: Migrate to Postcss 8 API
+Updated: dev dependecies
+Updated: package.json
+
+
 ## 2.3.1 (2019-11-13)
 
 Added: Support of Material Icons font
@@ -57,8 +66,11 @@ Changed: added option with custom path in the `hosted` method.
 ## 1.5.0 (2016-10-11)
 
 Added: `variants` method
+
 Added: support of 'font-display'
+
 Added: support of 'font-stretch'
+
 Added: support of 'unicode-range'
 
 ## 1.4.1 (2016-10-10)
