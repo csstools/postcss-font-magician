@@ -8,9 +8,9 @@
     "Ruslan Abdullaev <skarlatin@mail.ru>"
   ],
   "license": "CC0-1.0",
-  "repository": "jonathantneal/postcss-font-magician",
-  "homepage": "https://github.com/jonathantneal/postcss-font-magician#readme",
-  "bugs": "https://github.com/jonathantneal/postcss-font-magician/issues",
+  "repository": "csstools/postcss-font-magician",
+  "homepage": "https://github.com/csstools/postcss-font-magician#readme",
+  "bugs": "https://github.com/csstools/postcss-font-magician/issues",
   "main": "index.js",
   "scripts": {
     "clean": "git clean -X -d -f",
