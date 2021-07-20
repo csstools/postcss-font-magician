@@ -416,5 +416,5 @@ function plugin(initialOptions) {
 }
 
 // set plugin
-module.exports.postcss = true;
 module.exports = plugin;
+module.exports.postcss = true;
