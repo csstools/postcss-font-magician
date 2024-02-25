@@ -14,6 +14,18 @@ postcssTape(plugin)({
 	'google-fonts-once': {
 		message: "adds google fonts once",
 	},
+	'google-fonts-cyrillic': {
+		message: "supports google fonts (cyrillic)",
+		options: {
+			"variants": {
+				"Roboto Slab": {
+					"400": ["local woff2 woff", "cyrillic"]
+				}
+			},
+			"foundries": ["google"],
+			"display": "swap"
+		}
+	},
 	'font-display-option': {
 		message: "supports font-display option",
 		options: {
