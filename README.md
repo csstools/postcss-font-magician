@@ -391,6 +391,17 @@ require('postcss-font-magician')({
 By default, 'http/https' protocol is removed from the font url.
 Supports any string values, eg - '', 'http:' or 'https:'
 
+## Ignore
+
+If you don't need Font Magician in some part of your CSS, you can use control comments to disable it.
+
+```css
+
+body {
+    /* font-magician: ignore-next */
+    font-family: "Alice"; /* will not generate font-face */
+}
+```
 
 ## Future
 

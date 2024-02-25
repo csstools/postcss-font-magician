@@ -301,6 +301,18 @@ function getFontFaceRules(family, foundries, options) {
     return fontFaceRules;
 }
 
+function isRuleIgnored(rule) {
+    let previous = rule.prev();
+
+    if (
+        previous &&
+        previous.type === 'comment' &&
+        /(!\s*)?font-magician:\s*ignore(-|\s+)next/i.test(previous.text)
+    ) {
+        return true;
+    }
+}
+
 function plugin(initialOptions) {
     // get configured option
     const options = getConfiguredOptions(initialOptions || {});
@@ -356,8 +368,10 @@ function plugin(initialOptions) {
                     // set the font family
                     const family = getQuoteless(decl.value);
 
-                    // set the font family as declared
-                    fontFamiliesDeclared[family] = true;
+                    if (!isRuleIgnored(decl)) {
+                        // set the font family as declared
+                        fontFamiliesDeclared[family] = true;
+                    }
                 });
             });
 
