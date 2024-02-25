@@ -336,6 +336,19 @@ function isRuleIgnored(rule) {
 	return false;
 }
 
+function prepend(root, nodes) {
+	for (let i = 0; i < root.nodes.length; i++) {
+		const child = root.nodes[i];
+
+		if ('nodes' in child) {
+			child.before(nodes);
+			return;
+		}
+	}
+
+	root.prepend(nodes);
+}
+
 function plugin(initialOptions) {
 	// get configured option
 	const options = getConfiguredOptions(initialOptions || {});
@@ -412,7 +425,7 @@ function plugin(initialOptions) {
 					// if the font face rules array is filled
 					if (fontFaceRules.length) {
 						// prepend the font face rules
-						root.prepend(fontFaceRules);
+						prepend(root, fontFaceRules);
 					}
 				}
 			});

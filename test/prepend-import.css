@@ -1,0 +1,11 @@
+@import url("prepend-import.css");
+
+.foo {
+	color: red;
+}
+
+a {
+	font-family: "Alice"
+}
+
+b {}

@@ -1,0 +1,11 @@
+@layer a, b;
+
+.foo {
+	color: red;
+}
+
+a {
+	font-family: "Alice"
+}
+
+b {}

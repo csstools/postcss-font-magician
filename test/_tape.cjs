@@ -2,11 +2,23 @@ const { postcssTape } = require('@csstools/postcss-tape');
 const plugin = require('../index');
 
 postcssTape(plugin)({
+	'prepend-charset': {
+		message: "inserts font faces at the beginning but after charset",
+	},
+	'prepend-import': {
+		message: "inserts font faces at the beginning but after import",
+	},
+	'prepend-layer': {
+		message: "inserts font faces at the beginning but after layer statements",
+	},
 	'bootstrap-fonts': {
 		message: "supports bootstrap fonts",
 	},
 	'bootstrap-fonts-once': {
 		message: "adds bootstrap fonts once",
+	},
+	'font-fallbacks': {
+		message: "supports font fallbacks",
 	},
 	'google-fonts': {
 		message: "supports google fonts",
