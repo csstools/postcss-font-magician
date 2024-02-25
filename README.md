@@ -399,7 +399,7 @@ If you don't need Font Magician in some part of your CSS, you can use control co
 
 body {
     /* font-magician: ignore next */
-    font-family: "Alice"; /* will not generate font-face */    
+    font-family: "Alice"; /* will not generate font-face */
 }
 ```
 
