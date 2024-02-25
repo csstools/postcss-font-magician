@@ -111,6 +111,13 @@ postcssTape(plugin)({
 			hosted: ['./test/fonts']
 		}
 	},
+	'hosted-fonts:ttf': {
+		message: "supports hosted fonts with ttf",
+		options: {
+			hosted: ['./test/fonts'],
+			formats: ['woff', 'ttf']
+		}
+	},
 	'hosted-fonts:custom-font-path': {
 		message: "supports hosted fonts",
 		options: {

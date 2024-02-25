@@ -435,8 +435,6 @@ function plugin(initialOptions) {
 				if (fontFaces) {
 					const asyncPath = path.resolve(process.cwd(), options.async)
 
-					console.log(asyncPath);
-
 					const asyncJs =
 					'(function(){' +
 					fs.readFileSync('loader.min.js', 'utf8') +
