@@ -269,7 +269,7 @@ The directory will be scanned for font files, which will be read and automatical
 **Please note** that at the moment the plugin doesn't detect woff2 fonts
 
 The first argument of `hosted` array is required and it should be a path that related to the project root. i.e. `./src/fonts`
-In this case, the path to the fonts folder structure must match the structure of the path to the fonts folder on the server, because the path will be relative css file.
+In this case, the path to the fonts folder structure must match the structure of the path to the fonts folder on the server, because **the path will be relative css file**.
 
 The second argument of `hosted` array is optional and it can be an arbitrary path which should match the fonts directory on the site.
 i.e. `/assets/fonts`
