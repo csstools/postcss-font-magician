@@ -1,11 +1,11 @@
 /* global describe, it */
-let postcss = require('postcss');
-let expect = require('chai').expect;
+var postcss = require('postcss');
+var expect = require('chai').expect;
 
-let plugin = require('../');
+var plugin = require('../');
 
-let test = function(input, output, opts, done) {
-    postcss([ plugin(opts) ])
+var test = function(input, output, opts, done) {
+    postcss([plugin(opts)])
         .process(input)
         .then(function(result) {
             result.root.walkAtRules('font-face', function(rule) {
@@ -85,8 +85,8 @@ describe('postcss-font-magician', function() {
                 {
                     variants: {
                         'Open Sans': {
-                            '300': [ 'woff' ],
-                            '400 italic': [ 'eot woff' ]
+                            '300': ['woff'],
+                            '400 italic': ['eot woff']
                         }
                     }
                 },
@@ -123,7 +123,7 @@ describe('postcss-font-magician', function() {
                                 'woff',
                                 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF'
                             ],
-                            '400 italic': [ 'eot woff' ]
+                            '400 italic': ['eot woff']
                         }
                     }
                 },
@@ -143,7 +143,7 @@ describe('postcss-font-magician', function() {
                                 'woff2',
                                 'cyrillic, latin-ext'
                             ],
-                            '400 italic': [ 'woff2', 'vietnamese' ]
+                            '400 italic': ['woff2', 'vietnamese']
                         }
                     }
                 },
@@ -159,8 +159,8 @@ describe('postcss-font-magician', function() {
                 {
                     variants: {
                         'Open Sans': {
-                            '300 condensed': [ 'woff' ],
-                            '400 italic': [ 'eot woff' ]
+                            '300 condensed': ['woff'],
+                            '400 italic': ['eot woff']
                         }
                     }
                 },
@@ -176,8 +176,8 @@ describe('postcss-font-magician', function() {
                 {
                     variants: {
                         'Open Sans': {
-                            '300 normal condensed': [ 'woff' ],
-                            '400 italic': [ 'eot woff' ]
+                            '300 normal condensed': ['woff'],
+                            '400 italic': ['eot woff']
                         }
                     }
                 },
@@ -193,8 +193,8 @@ describe('postcss-font-magician', function() {
                 {
                     variants: {
                         'Open Sans': {
-                            '300': [ 'woff' ],
-                            '400 italic ultra-condensed': [ 'eot woff' ]
+                            '300': ['woff'],
+                            '400 italic ultra-condensed': ['eot woff']
                         }
                     }
                 },
@@ -222,7 +222,7 @@ describe('postcss-font-magician', function() {
                 'a{font-family:"Source Sans Pro"}b{}',
 
             {
-                hosted: [ './test/fonts' ]
+                hosted: ['./test/fonts']
             },
             done
         );
@@ -250,7 +250,7 @@ describe('postcss-font-magician', function() {
                 'a{font-family:"Source Sans Pro"}b{}',
 
             {
-                hosted: [ './test/fonts', '/some/custom/path' ]
+                hosted: ['./test/fonts', '/some/custom/path']
             },
             done
         );
@@ -292,7 +292,7 @@ describe('postcss-font-magician', function() {
                 },
                 variants: {
                     body: {
-                        '400': [ 'woff' ]
+                        '400': ['woff']
                     }
                 }
             },
@@ -365,22 +365,22 @@ describe('postcss-font-magician', function() {
         );
     });
 
-    it('supports ignoring a declaration', function(done) {
+    it('supports Material Icons', function(done) {
         test(
-            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
+            'a{font-family:"Material Icons"}b{}',
 
-            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
+            '@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNY.eot?#) format("eot"),url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2"),url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff) format("woff")}a{font-family:"Material Icons"}b{}',
 
             {},
             done
         );
     });
 
-    it('supports Material Icons', function(done) {
+    it('supports ignoring a declaration', function (done) {
         test(
-            'a{font-family:"Material Icons"}b{}',
+            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
 
-            '@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNY.eot?#) format("eot"),url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2"),url(//fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff) format("woff")}a{font-family:"Material Icons"}b{}',
+            'a{/* font-magician: ignore next */font-family:"Alice"}b{}',
 
             {},
             done
