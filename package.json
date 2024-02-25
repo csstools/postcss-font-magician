@@ -1,6 +1,6 @@
 {
-  "name": "@alaguna/postcss-font-magician",
-  "version": "2.2.1",
+  "name": "postcss-font-magician",
+  "version": "3.0.0",
   "description": "PostCSS plugin that magically generates all the @font-face rules",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "contributors": [
@@ -8,40 +8,40 @@
     "Ruslan Abdullaev <skarlatin@mail.ru>"
   ],
   "license": "CC0-1.0",
-  "repository": "Antonio-Laguna/postcss-font-magician",
-  "homepage": "https://github.com/Antonio-Laguna/postcss-font-magician#readme",
-  "bugs": "https://github.com/Antonio-Laguna/postcss-font-magician/issues",
+  "repository": "jonathantneal/postcss-font-magician",
+  "homepage": "https://github.com/jonathantneal/postcss-font-magician#readme",
+  "bugs": "https://github.com/jonathantneal/postcss-font-magician/issues",
   "main": "index.js",
   "scripts": {
     "clean": "git clean -X -d -f",
-    "precommit": "lint-staged",
     "test": "echo 'Running tests...'; ./node_modules/.bin/mocha && npm run lint",
     "lint": "./node_modules/.bin/eslint index.js"
   },
   "engines": {
-    "node": ">=6.4.0"
+    "node": "^10 || ^12 || >=14"
   },
   "lint-staged": {
     "*.js": [
-      "npm run test --",
-      "git add"
+      "npm run test --"
     ]
   },
   "dependencies": {
     "bootstrap-fonts-complete": "^1.0.0",
     "directory-fonts-complete": "^1.2.0",
-    "google-fonts-complete": "^1.2.3",
-    "postcss": "^6.0.22"
+    "google-fonts-complete": "^2.1.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.3.0",
-    "mocha": "^5.2.0",
-    "prettier": "^1.13.4"
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "mocha": "^8.1.3",
+    "postcss": "^8.1.1"
+  },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
   },
   "keywords": [
     "postcss",
@@ -56,5 +56,10 @@
     "variants",
     "typography",
     "type"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
