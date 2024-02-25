@@ -1,5 +1,6 @@
 ## 4.0.0 (2024-02-25)
 
+- Drop support for Node versions older than 18
 - Add ignore feature [#70](https://github.com/csstools/postcss-font-magician/pull/70)
 - Fix support for `postcss-load-config` [#102](https://github.com/csstools/postcss-font-magician/pull/102)
 - Fix repo and homepage urls [#101](https://github.com/csstools/postcss-font-magician/pull/101)

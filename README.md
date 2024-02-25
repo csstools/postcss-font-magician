@@ -10,24 +10,24 @@ Just use the **font** and **font-family** properties as if they were magic.
 /* before */
 
 body {
-   font-family: "Alice";
+	font-family: "Alice";
 }
 
 /* after */
 
 @font-face {
-   font-family: "Alice";
-   font-style: normal;
-   font-weight: 400;
-   src: local("Alice"), local("Alice-Regular"),
-        url("http://fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#") format("eot"),
-        url("http://fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2") format("woff2"),
-        url("http://fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff")  format("woff"),
-        url("http://fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf")   format("truetype")
+	font-family: "Alice";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Alice"), local("Alice-Regular"),
+		url("http://fonts.gstatic.com/s/alice/v7/sZyKh5NKrCk1xkCk_F1S8A.eot?#") format("eot"),
+		url("http://fonts.gstatic.com/s/alice/v7/l5RFQT5MQiajQkFxjDLySg.woff2") format("woff2"),
+		url("http://fonts.gstatic.com/s/alice/v7/_H4kMcdhHr0B8RDaQcqpTA.woff")  format("woff"),
+		url("http://fonts.gstatic.com/s/alice/v7/acf9XsUhgp1k2j79ATk2cw.ttf")   format("truetype")
 }
 
 body {
-  font-family: "Alice";
+	font-family: "Alice";
 }
 ```
 
@@ -35,7 +35,7 @@ body {
 * Want to use **Material Icons**? 
 ```css
 body {
-   font-family: "Material Icons";
+	font-family: "Material Icons";
 }
 ```
 * Want to use the visitor’s **local** copy of a font? Done.
@@ -61,138 +61,138 @@ yarn add postcss postcss-font-magician --dev
 ### Node
 
 Use [Font Magician] in your script:
-   ```js
-   const fs = require('fs');
-   const postcss = require('postcss');
-   const pfm = require('postcss-font-magician');
-   postcss([
-      pfm({ /* options */ })
-   ]).process(
-      fs.readFileSync('./css/src/style.css', 'utf8')
-   ).then(function (result) {
-      fs.writeFileSync('./css/style.css', result.css);
-   });
-   ```
+	```js
+	const fs = require('fs');
+	const postcss = require('postcss');
+	const pfm = require('postcss-font-magician');
+	postcss([
+		pfm({ /* options */ })
+	]).process(
+		fs.readFileSync('./css/src/style.css', 'utf8')
+	).then(function (result) {
+		fs.writeFileSync('./css/style.css', result.css);
+	});
+	```
 
 
 ### Webpack
 
 Use [Font Magician] in your webpack.config.js:
 
-  *Webpack 1.x*
+*Webpack 1.x*
 
-  ```js
-    postcss: function () {
-      return [
-        ...
-        fontMagician({
-            variants: {
-                'Roboto Condensed': {
-                    '300': [],
-                    '400': [],
-                    '700': []
-                }
-            },
-            foundries: ['google']
-        })
-        ...
-      ];
-  }
-  ```
+```js
+	postcss: function () {
+		return [
+			...
+			fontMagician({
+					variants: {
+							'Roboto Condensed': {
+									'300': [],
+									'400': [],
+									'700': []
+							}
+					},
+					foundries: ['google']
+			})
+			...
+		];
+}
+```
 
-  *Webpack 2.x*
+*Webpack 2.x*
 
-  ```js
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        ...
-        postcss: [
-          ...
-          fontMagician({
-              variants: {
-                  'Roboto Condensed': {
-                      '300': [],
-                      '400': [],
-                      '700': []
-                  }
-              },
-              foundries: ['google']
-          })
-        ]
-      },
-    }),
-    ...
-  ]
-  ```
+```js
+plugins: [
+	new webpack.LoaderOptionsPlugin({
+		options: {
+			...
+			postcss: [
+				...
+				fontMagician({
+					variants: {
+						'Roboto Condensed': {
+							'300': [],
+							'400': [],
+							'700': []
+						}
+					},
+					foundries: ['google']
+				})
+			]
+		},
+	}),
+	...
+]
+```
 
-  *Webpack 3+*
+*Webpack 3+*
 
-  **postcss.config.js**
-  ```js
-  module.exports = {
-    plugins: {
-      'postcss-font-magician': {
-           variants: {
-               'Roboto Condensed': {
-                   '300': [],
-                   '400': [],
-                   '700': []
-               }
-           },
-           foundries: ['google']
-      }
-    }
-  }
-  ```
+**postcss.config.js**
+```js
+module.exports = {
+	plugins: {
+		'postcss-font-magician': {
+			variants: {
+				'Roboto Condensed': {
+					'300': [],
+					'400': [],
+					'700': []
+				}
+			},
+			foundries: ['google']
+		}
+	}
+}
+```
 
-  **webpack.config.js**
-  ```js
-  {
-    loader: 'postcss-loader',
-    options: {
-      config: {
-        path: 'path/to/postcss.config.js'
-      }
-    }
-  }
-  ```
+**webpack.config.js**
+```js
+{
+	loader: 'postcss-loader',
+	options: {
+		config: {
+			path: 'path/to/postcss.config.js'
+		}
+	}
+}
+```
 
 ### Grunt
 
 Use [Font Magician] in your Gruntfile:
-   ```js
-   grunt.loadNpmTasks('grunt-postcss');
+```js
+grunt.loadNpmTasks('grunt-postcss');
 
-   grunt.initConfig({
-      postcss: {
-         options: {
-            processors: [
-               require('postcss-font-magician')({ /* options */ })
-            ]
-         },
-         src: './css/src/*.css',
-         dest: './css'
-      }
-   });
-   ```
+grunt.initConfig({
+	postcss: {
+		options: {
+			processors: [
+				require('postcss-font-magician')({ /* options */ })
+			]
+		},
+		src: './css/src/*.css',
+		dest: './css'
+	}
+});
+```
 
 ### Gulp
 
 Use [Font Magician] in your Gulpfile:
-   ```js
-   var postcss = require('gulp-postcss');
+```js
+var postcss = require('gulp-postcss');
 
-   gulp.task('css', function () {
-      return gulp.src('./css/src/*.css').pipe(
-         postcss([
-            require('postcss-font-magician')({ /* options */ })
-         ])
-      ).pipe(
-         gulp.dest('./css')
-      );
-   });
-   ```
+gulp.task('css', function () {
+	return gulp.src('./css/src/*.css').pipe(
+		postcss([
+			require('postcss-font-magician')({ /* options */ })
+		])
+	).pipe(
+		gulp.dest('./css')
+	);
+});
+```
 
 ## Options
 
@@ -202,12 +202,12 @@ Want to download only specific font weights, styles and formats?
 
 ```js
 require('postcss-font-magician')({
-   variants: {
-                'Open Sans': {
-                    '300': ['woff, eot, woff2'],
-                    '400 italic': ['woff2']
-                }
-            }
+	variants: {
+		'Open Sans': {
+			'300': ['woff, eot, woff2'],
+			'400 italic': ['woff2']
+		}
+	}
 });
 ```
 
@@ -219,12 +219,12 @@ Need to support [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS
 
 ```js
 require('postcss-font-magician')({
-   variants: {
-                'Open Sans': {
-                    '300': ['woff2', 'cyrillic-ext, greek'],
-                    '400 italic': ['woff2', 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF']
-                }
-            }
+	variants: {
+		'Open Sans': {
+			'300': ['woff2', 'cyrillic-ext, greek'],
+			'400 italic': ['woff2', 'U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF']
+		}
+	}
 });
 ```
 
@@ -234,13 +234,13 @@ Need to support [font-stretch](https://developer.mozilla.org/en-US/docs/Web/CSS/
 
 ```js
 require('postcss-font-magician')({
-   variants: {
-                'Open Sans': {
-                    '300 ultra-condensed': ['woff, eot, woff2'],
-                    '400 italic': ['woff2'],
-                    '400 italic semi-expanded': ['woff2']
-                }
-            }
+	variants: {
+		'Open Sans': {
+			'300 ultra-condensed': ['woff, eot, woff2'],
+			'400 italic': ['woff2'],
+			'400 italic semi-expanded': ['woff2']
+		}
+	}
 });
 ```
 
@@ -250,7 +250,7 @@ Need to control how custom fonts display when they loading? You can use [font-di
 
 ```js
 require('postcss-font-magician')({
-   display: 'swap'
+	display: 'swap'
 });
 ```
 
@@ -260,7 +260,7 @@ Have a directory of self-hosted fonts?
 
 ```js
 require('postcss-font-magician')({
-   hosted: ['./src/fonts', /custom/path/to/fonts/on/site]
+	hosted: ['./src/fonts', /custom/path/to/fonts/on/site]
 });
 ```
 
@@ -281,9 +281,9 @@ Prefer another name for particular fonts?
 
 ```js
 require('postcss-font-magician')({
-   aliases: {
-      'sans-serif': 'Source Sans Pro'
-   }
+	aliases: {
+		'sans-serif': 'Source Sans Pro'
+	}
 });
 ```
 
@@ -294,14 +294,14 @@ You can also use the 'aliases' option with other options, i.g with the 'variants
 
 ```js
 require('postcss-font-magician')({
-   aliases: {
-      'sans-serif': 'Source Sans Pro'
-   },
-   variants: {
-      'sans-serif': {
-          '400': ['woff']
-      }
-   }
+	aliases: {
+		'sans-serif': 'Source Sans Pro'
+	},
+	variants: {
+		'sans-serif': {
+			'400': ['woff']
+		}
+	}
 });
 ```
 
@@ -311,7 +311,7 @@ Need to load the fonts asynchronously?
 
 ```js
 require('postcss-font-magician')({
-   async: 'path/to/your-fonts-async-loader.js'
+	async: 'path/to/your-fonts-async-loader.js'
 });
 ```
 
@@ -323,7 +323,7 @@ Want to control which font formats are used?
 
 ```js
 require('postcss-font-magician')({
-   formats: 'woff2 woff'
+	formats: 'woff2 woff'
 });
 ```
 
@@ -336,7 +336,7 @@ Want to enable specific foundries? Provide a space-separated list or array:
 
 ```js
 require('postcss-font-magician')({
-   foundries: 'bootstrap google'
+	foundries: 'bootstrap google'
 });
 ```
 
@@ -349,32 +349,32 @@ Need something very specific? I can do that, too.
 
 ```js
 require('postcss-font-magician')({
-   custom: {
-      'My Special Font': {
-         variants: {
-            normal: {
-               400: {
-                  url: {
-                     woff2: 'path/to/my-body-font-normal-400.woff2',
-                     woff: 'path/to/my-body-font-normal-400.woff'
-                  }
-               },
-               700: {
-                  url: {
-                     woff2: 'path/to/my-body-font-normal-700.woff2'
-                  }
-               }
-            },
-            italic: {
-               400: {
-                  url: {
-                     woff2: 'path/to/my-body-font-italic-400.woff2'
-                  }
-               }
-            }
-         }
-      }
-   }
+	custom: {
+		'My Special Font': {
+			variants: {
+				normal: {
+					400: {
+						url: {
+							woff2: 'path/to/my-body-font-normal-400.woff2',
+							woff: 'path/to/my-body-font-normal-400.woff'
+						}
+					},
+					700: {
+						url: {
+							woff2: 'path/to/my-body-font-normal-700.woff2'
+						}
+					}
+				},
+				italic: {
+					400: {
+						url: {
+							woff2: 'path/to/my-body-font-italic-400.woff2'
+						}
+					}
+				}
+			}
+		}
+	}
 });
 ```
 
@@ -384,7 +384,7 @@ Do you want to control the font URL-address protocol?
 
 ```js
 require('postcss-font-magician')({
-   protocol: 'https:'
+	protocol: 'https:'
 });
 ```
 
@@ -398,8 +398,8 @@ If you don't need Font Magician in some part of your CSS, you can use control co
 ```css
 
 body {
-    /* font-magician: ignore-next */
-    font-family: "Alice"; /* will not generate font-face */
+	/* font-magician: ignore-next */
+	font-family: "Alice"; /* will not generate font-face */
 }
 ```
 
