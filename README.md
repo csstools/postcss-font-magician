@@ -1,4 +1,4 @@
-# Font Magician [![Build Status][ci-img]][ci]
+# Font Magician [![test](https://github.com/csstools/postcss-font-magician/actions/workflows/test.yml/badge.svg)](https://github.com/csstools/postcss-font-magician/actions/workflows/test.yml)
 
 <img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
@@ -412,10 +412,8 @@ Look forward to more magic, like:
 
 Enjoy!
 
-[ci]: https://travis-ci.org/jonathantneal/postcss-font-magician
-[ci-img]: https://travis-ci.org/jonathantneal/postcss-font-magician.svg
-[creating an issue]: https://github.com/jonathantneal/postcss-font-magician/issues
-[Font Magician]: https://github.com/jonathantneal/postcss-font-magician
+[creating an issue]: https://github.com/csstools/postcss-font-magician/issues
+[Font Magician]: https://github.com/csstools/postcss-font-magician
 [Grunt PostCSS]: https://github.com/nDmitry/grunt-postcss
 [Gulp PostCSS]: https://github.com/postcss/gulp-postcss
 [PostCSS]: https://github.com/postcss/postcss
