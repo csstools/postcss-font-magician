@@ -6,7 +6,7 @@
 - Fix repo and homepage urls [#101](https://github.com/csstools/postcss-font-magician/pull/101)
 - Fix typo in readme [#87](https://github.com/csstools/postcss-font-magician/pull/87)
 - Fix source maps [#109](https://github.com/csstools/postcss-font-magician/issues/109)
-- Fix output path for `async` option,this is now relative to the process.
+- Fix output path for `async` option, this is now relative to the process. (BREAKING!)
 - Fix order of CSS, now the `@font-face` will be inserted after `@charset`, `@import` and similar statements. [#107](https://github.com/csstools/postcss-font-magician/issues/107)
 
 
