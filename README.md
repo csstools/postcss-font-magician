@@ -236,7 +236,7 @@ Need to support [font-stretch](https://developer.mozilla.org/en-US/docs/Web/CSS/
 require('postcss-font-magician')({
    variants: {
                 'Open Sans': {
-                    '300 ultra-condenced': ['woff, eot, woff2'],
+                    '300 ultra-condensed': ['woff, eot, woff2'],
                     '400 italic': ['woff2'],
                     '400 italic semi-expanded': ['woff2']
                 }
