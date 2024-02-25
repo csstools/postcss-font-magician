@@ -5,6 +5,8 @@
 - Fix support for `postcss-load-config` [#102](https://github.com/csstools/postcss-font-magician/pull/102)
 - Fix repo and homepage urls [#101](https://github.com/csstools/postcss-font-magician/pull/101)
 - Fix typo in readme [#87](https://github.com/csstools/postcss-font-magician/pull/87)
+- Fix source maps
+- Fix output path for `async` option,this is now relative to the process.
 
 
 ## 3.0.0 (2020-10-03)

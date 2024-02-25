@@ -191,7 +191,8 @@ function generateFont(postcss, node, family, fontFaceRules, options, defaultOpti
 			fontFaceRule.append(
 				postcss.decl({
 					prop: 'font-stretch',
-					value: options.stretch
+					value: options.stretch,
+					source: node.source
 				})
 			);
 		}
@@ -201,7 +202,8 @@ function generateFont(postcss, node, family, fontFaceRules, options, defaultOpti
 			fontFaceRule.append(
 				postcss.decl({
 					prop: 'font-display',
-					value: options.display
+					value: options.display,
+					source: node.source
 				})
 			);
 		}
@@ -213,7 +215,8 @@ function generateFont(postcss, node, family, fontFaceRules, options, defaultOpti
 					fontFaceRule.clone().append(
 						postcss.decl({
 							prop: 'unicode-range',
-							value: range
+							value: range,
+							source: node.source
 						})
 					)
 				);
@@ -388,10 +391,8 @@ function plugin(initialOptions) {
 					// set the font family
 					const family = getQuoteless(decl.value);
 
-					if (!isRuleIgnored(decl)) {
-						// set the font family as declared
-						fontFamiliesDeclared[family] = true;
-					}
+					// set the font family as declared
+					fontFamiliesDeclared[family] = true;
 				});
 			});
 
@@ -401,7 +402,7 @@ function plugin(initialOptions) {
 				const family = getFirstFontFamily(list, decl);
 
 				// if the font family is not declared
-				if (!fontFamiliesDeclared[family]) {
+				if (!fontFamiliesDeclared[family] && !isRuleIgnored(decl)) {
 					// set the font family as declared
 					fontFamiliesDeclared[family] = true;
 
@@ -432,7 +433,9 @@ function plugin(initialOptions) {
 				});
 
 				if (fontFaces) {
-					const asyncPath = getRelativePath(root.source.input.file, options.async);
+					const asyncPath = path.resolve(process.cwd(), options.async)
+
+					console.log(asyncPath);
 
 					const asyncJs =
 					'(function(){' +
@@ -449,6 +452,7 @@ function plugin(initialOptions) {
 	};
 }
 
+plugin.postcss = true;
+
 // set plugin
 module.exports = plugin;
-module.exports.postcss = true;

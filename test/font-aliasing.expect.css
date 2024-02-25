@@ -1,0 +1,12 @@
+@font-face {
+	font-family: body;
+	font-style: normal;
+	font-weight: 400;
+	src: url(//fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4uaVQ.woff) format("woff")
+}
+
+a {
+	font-family: body
+}
+
+b {}

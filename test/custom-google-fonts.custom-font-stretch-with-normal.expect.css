@@ -2,7 +2,8 @@
 	font-family: "Open Sans";
 	font-style: normal;
 	font-weight: 300;
-	src: url(//fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0B4uaVQ.woff) format("woff")
+	src: url(//fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0B4uaVQ.woff) format("woff");
+	font-stretch: condensed
 }
 
 @font-face {

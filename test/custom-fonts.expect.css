@@ -1,0 +1,12 @@
+@font-face {
+	font-family: body;
+	font-style: normal;
+	font-weight: 400;
+	src: url(path/to/my-body-font.woff2) format("woff2")
+}
+
+a {
+	font-family: body
+}
+
+b {}

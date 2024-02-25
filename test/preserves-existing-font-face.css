@@ -1,0 +1,9 @@
+@font-face {
+	font-family: Alice
+}
+
+a {
+	font-family: "Alice"
+}
+
+b {}
