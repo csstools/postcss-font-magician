@@ -13,7 +13,8 @@
 	"bugs": "https://github.com/csstools/postcss-font-magician/issues",
 	"main": "index.js",
 	"scripts": {
-		"test": "node --test"
+		"test": "node --test ./test/_tape.cjs",
+		"test:rewrite-expects": "REWRITE_EXPECTS=true node --test ./test/_tape.cjs"
 	},
 	"engines": {
 		"node": ">=18"

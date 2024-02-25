@@ -1,0 +1,35 @@
+@font-face {
+	font-family: monospace;
+	font-style: italic;
+	font-weight: 400;
+	src: local("Menlo Italic"),local(Menlo-Italic),local("Consolas Italic"),local(Consolas-Italic),local("Courier New Italic")
+}
+
+@font-face {
+	font-family: monospace;
+	font-style: italic;
+	font-weight: 700;
+	src: local("Menlo Bold Italic"),local(Menlo-BoldItalic),local(Monaco),local("Consolas Bold Italic"),local(Consolas-BoldItalic),local("Courier New Bold Italic")
+}
+
+@font-face {
+	font-family: monospace;
+	font-style: normal;
+	font-weight: 400;
+	src: local("Menlo Regular"),local(Menlo-Regular),local(Monaco),local(Consolas),local("Courier New")
+}
+
+@font-face {
+	font-family: monospace;
+	font-style: normal;
+	font-weight: 700;
+	src: local("Menlo Bold"),local(Menlo-Bold),local(Monaco),local("Consolas Bold"),local(Consolas-Bold),local("Courier New Bold")
+}
+
+a {
+	font-family: monospace
+}
+
+b {
+	font-family: monospace
+}
