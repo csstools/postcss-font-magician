@@ -307,7 +307,7 @@ function isRuleIgnored(rule) {
     if (
         previous &&
         previous.type === 'comment' &&
-        /(!\s*)?font-magician:\s*ignore\s+next/i.test(previous.text)
+        /(!\s*)?font-magician:\s*ignore(-|\s+)next/i.test(previous.text)
     ) {
         return true;
     }
