@@ -1,3 +1,11 @@
+## 4.0.0 (2024-02-25)
+
+- Add ignore feature [#70](https://github.com/csstools/postcss-font-magician/pull/70)
+- Fix support for `postcss-load-config` [#102](https://github.com/csstools/postcss-font-magician/pull/102)
+- Fix repo and homepage urls [#101](https://github.com/csstools/postcss-font-magician/pull/101)
+- Fix typo in readme [#87](https://github.com/csstools/postcss-font-magician/pull/87)
+
+
 ## 3.0.0 (2020-10-03)
 
 Dropped support of Node.js 6.x, 8.x, 11.x, and 13.x
