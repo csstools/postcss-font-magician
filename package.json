@@ -20,7 +20,6 @@
 		"node": ">=18"
 	},
 	"dependencies": {
-		"bootstrap-fonts-complete": "^1.0.0",
 		"directory-fonts-complete": "^1.2.0",
 		"google-fonts-complete": "^2.1.1"
 	},

@@ -25,7 +25,7 @@ const defaultOptions = {
 const initialFoundries = {
 	custom: {},
 	hosted: {},
-	bootstrap: require('bootstrap-fonts-complete'),
+	bootstrap: require('./bootstrap-fonts-complete.json'),
 	google: require('google-fonts-complete')
 };
 

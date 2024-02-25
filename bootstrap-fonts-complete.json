@@ -1,0 +1,161 @@
+{
+	"monospace": {
+		"category": "monospace",
+		"lastModified": "2015-07-24",
+		"version": "v1",
+		"variants": {
+			"italic": {
+				"400": {
+					"local": [
+						"'Menlo Italic'",
+						"'Menlo-Italic'",
+						"'Consolas Italic'",
+						"'Consolas-Italic'",
+						"'Courier New Italic'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Menlo Bold Italic'",
+						"'Menlo-BoldItalic'",
+						"'Monaco'",
+						"'Consolas Bold Italic'",
+						"'Consolas-BoldItalic'",
+						"'Courier New Bold Italic'"
+					]
+				}
+			},
+			"normal": {
+				"400": {
+					"local": [
+						"'Menlo Regular'",
+						"'Menlo-Regular'",
+						"'Monaco'",
+						"'Consolas'",
+						"'Courier New'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Menlo Bold'",
+						"'Menlo-Bold'",
+						"'Monaco'",
+						"'Consolas Bold'",
+						"'Consolas-Bold'",
+						"'Courier New Bold'"
+					]
+				}
+			}
+		}
+	},
+	"sans-serif": {
+		"category": "sans-serif",
+		"lastModified": "2015-07-24",
+		"version": "v1",
+		"variants": {
+			"italic": {
+				"300": {
+					"local": [
+						"'Helvetica Neue Light Italic'",
+						"'HelveticaNeue-LightItalic'",
+						"'Helvetica Light Oblique'",
+						"'Helvetica-LightOblique'"
+					]
+				},
+				"400": {
+					"local": [
+						"'Helvetica Neue Italic'",
+						"'HelveticaNeue-Italic'",
+						"'Helvetica Oblique'",
+						"'Helvetica-Oblique'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Helvetica Neue Bold Italic'",
+						"'HelveticaNeue-BoldItalic'",
+						"'Helvetica Bold Oblique'",
+						"'Helvetica-BoldOblique'"
+					]
+				}
+			},
+			"normal": {
+				"300": {
+					"local": [
+						"'Helvetica Neue Light'",
+						"'HelveticaNeue-Light'",
+						"'Helvetica Light'",
+						"'Helvetica-Light'"
+					]
+				},
+				"400": {
+					"local": [
+						"'HelveticaNeue'",
+						"'Helvetica'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Helvetica Neue Bold'",
+						"'HelveticaNeue-Bold'",
+						"'Helvetica Bold'",
+						"'Helvetica-Bold'"
+					]
+				}
+			}
+		}
+	},
+	"serif": {
+		"category": "serif",
+		"lastModified": "2015-07-24",
+		"version": "v1",
+		"variants": {
+			"italic": {
+				"300": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				},
+				"400": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				}
+			},
+			"normal": {
+				"300": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				},
+				"400": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				},
+				"700": {
+					"local": [
+						"'Georgia'",
+						"'Times New Roman'",
+						"'Times'"
+					]
+				}
+			}
+		}
+	}
+}
