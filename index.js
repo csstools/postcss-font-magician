@@ -302,7 +302,7 @@ function getFontFaceRules(family, foundries, options) {
 }
 
 function isRuleIgnored(rule) {
-    var previous = rule.prev();
+    let previous = rule.prev();
 
     if (
         previous &&
@@ -430,5 +430,5 @@ function plugin(initialOptions) {
 }
 
 // set plugin
-module.exports.postcss = true;
 module.exports = plugin;
+module.exports.postcss = true;

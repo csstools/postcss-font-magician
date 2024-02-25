@@ -1,7 +1,28 @@
+## 3.0.0 (2020-10-03)
+
+Dropped support of Node.js 6.x, 8.x, 11.x, and 13.x
+
+Added: Migrate to Postcss 8 API
+Updated: dev dependecies
+Updated: package.json
+
+
+## 2.3.1 (2019-11-13)
+
+Added: Support of Material Icons font
+Updated: google-fonts-complete dependency
+Updated: dev dependecies
+Updated: package.json
+
+
+## 2.2.2 (2019-06-13)
+
+Updated: google-fonts-complete dependency
+Updated: dev dependecies
+
 ## 2.2.1 (2018-06-06)
 
 Updated: google-fonts-complete dependency
-
 
 ## 2.2.0 (2018-06-05)
 
@@ -45,8 +66,11 @@ Changed: added option with custom path in the `hosted` method.
 ## 1.5.0 (2016-10-11)
 
 Added: `variants` method
+
 Added: support of 'font-display'
+
 Added: support of 'font-stretch'
+
 Added: support of 'unicode-range'
 
 ## 1.4.1 (2016-10-10)
